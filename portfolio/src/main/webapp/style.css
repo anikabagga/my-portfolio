@@ -7,3 +7,10 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+div.profile-img img{
+  max-height: 200;
+  max-width: 200;
+  width: auto;
+  border-radius: 50%
+}
