@@ -1,4 +1,3 @@
-
 *{
     box-sizing: border-box;
 }
@@ -29,6 +28,8 @@ p {
     font-weight: 200;
     font-size: 20px;
 }
+
+/* bio styling */
 
 .bio-text{
     margin-left: 20px;
@@ -76,6 +77,9 @@ p {
   border-radius: 50% ;
 }
 
+
+/* activities section styling */
+
 h2{
     font-family: 'Noto Sans';
     font-weight: 300;
@@ -84,6 +88,20 @@ h2{
     margin-bottom: 40px;
     margin-top: 50px;
 }
+
+.underline-magical {
+  background-image: linear-gradient(to right, rgb(250, 112, 154) 0%, rgb(254, 225, 64) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 88%;
+  transition: background-size 0.25s ease-in;
+}
+
+.underline-magical:hover{
+    background-size: 100% 88%;
+}
+
+/* footer */
 
 footer {
     line-height: 50px;
