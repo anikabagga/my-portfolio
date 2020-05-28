@@ -5,13 +5,16 @@
 html, body {
   height: 100%;
   margin: 0;
+  position: relative
 }
 
 #content {
+    position: relative;
     min-height: 100%;
-    margin: 0 auto -50px;
     margin-left: auto;
     margin-right: auto;
+    overflow: hidden;
+    padding-bottom: 50px;
 }
 
 h1 {
@@ -85,7 +88,6 @@ h2{
     font-weight: 300;
     font-size:  40px;
     font-style: bold;
-    margin-bottom: 40px;
     margin-top: 50px;
 }
 
@@ -101,6 +103,70 @@ h2{
     background-size: 100% 88%;
 }
 
+/* styling food diary section */
+
+.food-dairy {
+    margin-top: 40px;
+    margin-left: 0px;
+}
+
+.food-img img {
+  margin-top: 20px;
+  vertical-align: left;
+  padding-left: 0px;
+  margin-left: 0px
+}
+
+.food-second {
+    margin-top: 30px;
+}
+
+/* food pictures caption styling */
+
+.caption-style-1:hover .caption{
+    opacity: 1;
+    transform: translateY(-100px);
+    -webkit-transform:translateY(-100px);
+    -moz-transform:translateY(-100px);
+    -ms-transform:translateY(-100px);
+    -o-transform:translateY(-100px);
+}
+
+.caption-style-1 .caption{
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    -webkit-transition:all 0.15s ease-in-out;
+    -moz-transition:all 0.15s ease-in-out;
+    -o-transition:all 0.15s ease-in-out;
+    -ms-transition:all 0.15s ease-in-out;
+    transition:all 0.15s ease-in-out;
+}
+
+.caption-style-1 .blur{
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    z-index: 5;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    top: 20px;
+}
+
+.caption-style-1 .caption-text{
+    z-index: 10;
+    color: #fff;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    text-align: center;
+    top:20px;
+}
+
 /* footer */
 
 footer {
@@ -110,6 +176,10 @@ footer {
 
 .footer {
     height: 50px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
 }
 
 .fa-heart {
