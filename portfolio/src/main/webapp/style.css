@@ -115,7 +115,9 @@ h2{
   margin-top: 20px;
   vertical-align: left;
   padding-left: 0px;
-  margin-left: 0px
+  margin-left: 0px;
+  width: 90%; 
+  height: 25%;
 }
 
 .food-second {
