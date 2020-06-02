@@ -26,3 +26,11 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+//Prints Hello Anika on button click 
+function sayHello(){
+    fetch('/data').then(response => response.text()).then((greeting) => {
+    document.getElementById('hello-container').innerText = greeting;
+  });
+}
+
