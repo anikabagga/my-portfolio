@@ -34,3 +34,11 @@ function sayHello(){
   });
 }
 
+//retrieves json comments from server 
+function getComments(){
+    fetch('/data').then(response => response.json()).then((comments) => {
+       document.getElementById('comments-container').innerText = comments;
+    });
+   
+}
+
