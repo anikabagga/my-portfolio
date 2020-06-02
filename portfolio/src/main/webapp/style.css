@@ -17,6 +17,11 @@ body {
     margin: 0 auto;
 }
 
+#hello-container {
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
 h1 {
     font-family: 'Noto Sans';
     font-weight: 300;
