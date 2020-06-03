@@ -35,10 +35,17 @@ function sayHello(){
 }
 
 //retrieves json comments from server 
-function getComments(){
+function loadComments(){
     fetch('/data').then(response => response.json()).then((comments) => {
-       document.getElementById('comments-container').innerText = comments;
+      const allCommentsList = document.getElementById('comments-container');
+      comments.forEach((sentComment) => {
+          let allComments = document.createElement('p');
+          allComments.innerText = sentComment.comment
+          allCommentsList.append(allComments);
+      })
     });
    
 }
+
+
 

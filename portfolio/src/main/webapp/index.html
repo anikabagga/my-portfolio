@@ -15,8 +15,7 @@
         <title>Anika Bagga</title>
     </div>
   </head>
-  <body>
-
+  <body onload="loadComments()">
     <div id="content">
 
          <!-- Navigation Bar -->
@@ -37,11 +36,6 @@
             </ul>
             </div>
         </nav>
-
-         <!-- Say Hello Button -->
-        <button onclick="getComments()">Comments!</button>
-        <div id="comments-container"></div>
-    
 
        <!-- Bio Content -->
       <div id="bio">
@@ -347,6 +341,23 @@
                 </div>
             </div>
 
+             <!-- Comments Form -->
+             <div class= "row">
+                <a id="comments-section"></a>
+                <h2><span class="underline-magical food-diary">comments</span></h2>
+                <p style="font-style: italic; margin-bottom: 20px">please fill out the form to leave a comment</p>
+            </div>
+
+            <form action="/data" method="POST">
+                <p>Enter here:</p>
+                <textarea name="text-input"></textarea>
+                <br/><br/>
+                <input type="submit" />
+            </form>
+
+            <ul id="comments-container"></ul>
+
+            <!-- Footer -->
             <div class= "row">
                 <div class="footer">
                  <center><p>Made with <i class="fa fa-heart pulse"></i>  in Bay Area, CA</p></ce
