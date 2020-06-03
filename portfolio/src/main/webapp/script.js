@@ -39,12 +39,11 @@ function loadComments(){
     fetch('/data').then(response => response.json()).then((comments) => {
       const allCommentsList = document.getElementById('comments-container');
       comments.forEach((sentComment) => {
-          let allComments = document.createElement('p');
-          allComments.innerText = sentComment.comment
-          allCommentsList.append(allComments);
+          let singleComment = document.createElement('p');
+          singleComment.innerText = sentComment.comment
+          allCommentsList.append(singleComment);
       })
     });
-   
 }
 
 //Performs POST request to /delete-data and fetches data again so comments are deleted

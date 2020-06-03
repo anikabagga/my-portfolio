@@ -53,12 +53,9 @@ public class DataServlet extends HttpServlet {
       comments.add(userComment);
     }
      
-    //convert to json
+    //Convert to json
     response.setContentType("application/json;");
-    Gson gson = new Gson();
-    String json = gson.toJson(comments);
-    response.getWriter().println(json);
-    
+    response.getWriter().println(new Gson().toJson(comments));
   }
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -74,8 +71,7 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
-    // Redirect back to the HTML page.
+    //Redirect back to the HTML page.
     response.sendRedirect("/index.html#comments-section");
   }
-
 }
