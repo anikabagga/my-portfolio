@@ -63,7 +63,7 @@ public class DataServlet extends HttpServlet {
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    //recieves submitted comment 
+    //Recieves submitted comment 
     String comment = request.getParameter("text-input");
     long timestamp = System.currentTimeMillis();
 
@@ -74,9 +74,8 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
-    //testComments.add(commment);
     // Redirect back to the HTML page.
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/index.html#comments-section");
   }
 
 }

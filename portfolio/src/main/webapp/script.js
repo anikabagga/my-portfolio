@@ -34,7 +34,7 @@ function sayHello(){
   });
 }
 
-//retrieves json comments from server 
+//Retrieves json comments from server 
 function loadComments(){
     fetch('/data').then(response => response.json()).then((comments) => {
       const allCommentsList = document.getElementById('comments-container');
@@ -45,6 +45,12 @@ function loadComments(){
       })
     });
    
+}
+
+//Performs POST request to /delete-data and fetches data again so comments are deleted
+function deleteComments(){
+    fetch('delete-data', {method: 'POST'})
+        .then(loadComments());
 }
 
 

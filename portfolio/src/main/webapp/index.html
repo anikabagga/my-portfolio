@@ -33,13 +33,14 @@
                 <a href="#activities-section"><li>activities & projects</li></a>
                 <a href="#skills-section"><li>skills</li></a>
                 <a href="#food-section"><li>food diary</li></a>
+                <a href="#comments-section"><li>comments</li></a>
             </ul>
             </div>
         </nav>
 
        <!-- Bio Content -->
       <div id="bio">
-        <a id="about-section"></a>
+        <a id="about-section" name="about-section"></a>
          <!-- Name Label -->
         <div class="container">
             <div class="row row-name">
@@ -88,7 +89,7 @@
         </div>
          <!-- Activities Label -->
         <div class="container">
-            <a id="activities-section"></a>
+            <a id="activities-section" name="activities-section"></a>
             <div class= "row">
                 <h2><span class="underline-magical">activities & projects</span></h2>
                 <p style="font-style: italic;">highlights from what i've worked on</p>
@@ -190,7 +191,7 @@
         <!-- Skills Label -->
         <div class="container">
             <div class= "row">
-                <a id="skills-section"></a>
+                <a id="skills-section" name="skills-section"></a>
                 <h2><span class="underline-magical">skills</span></h2>
                 <p style="font-style: italic; margin-bottom: 40px">work in progress</p>
             </div>
@@ -245,7 +246,7 @@
          <!-- Food Gallery Label -->
         <div class="container">
             <div class= "row">
-                <a id="food-section"></a>
+                <a id="food-section" name="food-section"></a>
                 <h2><span class="underline-magical food-diary">food diary</span></h2>
                 <p style="font-style: italic; margin-bottom: 20px">a few of my favorite local eats</p>
             </div>
@@ -343,7 +344,7 @@
 
              <!-- Comments Form -->
              <div class= "row">
-                <a id="comments-section"></a>
+                <a id="comments-section" name="comments-section"></a>
                 <h2><span class="underline-magical food-diary">comments</span></h2>
                 <p style="font-style: italic; margin-bottom: 20px">please fill out the form to leave a comment</p>
             </div>
@@ -356,6 +357,7 @@
             </form>
 
             <ul id="comments-container"></ul>
+            <button onClick="deleteComments()">delete all comments</button> 
 
             <!-- Footer -->
             <div class= "row">
