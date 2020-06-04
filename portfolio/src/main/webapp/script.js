@@ -48,8 +48,23 @@ function loadComments(){
       
       for(var i = 0; i < commentsLimit; i++){
         let singleComment = document.createElement('p');
-        singleComment.innerText = `Name: ${comments[i].name} 
-                                    Comment: ${comments[i].comment} ${comments[i].mood}`;
+        var moodReceived = comments[i].mood;
+        if (moodReceived === "happy"){
+             singleComment.innerText = `Name: ${comments[i].name} 
+                                    Comment: ${comments[i].comment} 😊`;
+        } else if(moodReceived === "heart"){
+            singleComment.innerText = `Name: ${comments[i].name} 
+                                    Comment: ${comments[i].comment} 😍`;
+        } else if(moodReceived === "surprised"){
+            singleComment.innerText = `Name: ${comments[i].name} 
+                                    Comment: ${comments[i].comment} 😯`;
+        } else if(moodReceived === "sad"){
+            singleComment.innerText = `Name: ${comments[i].name} 
+                                    Comment: ${comments[i].comment} 😥`;
+        } else {
+              singleComment.innerText = `Name: ${comments[i].name} 
+                                    Comment: ${comments[i].comment} `;
+        }
         allCommentsList.append(singleComment);
       }
     });
