@@ -40,18 +40,21 @@ window.onload = loadComments();
 function loadComments(){
     
     var commentsLimit = commentAmount();
+    var order = document.getElementById("order").value;
 
-    fetch('/data?number=' + commentsLimit).then(response => response.json()).then((comments) => {
+    fetch('/data?number=' + commentsLimit + '&order=' + order).then(response => response.json()).then((comments) => {
       const allCommentsList = document.getElementById('comments-container');
       allCommentsList.innerHTML = '';
       
       for(var i = 0; i < commentsLimit; i++){
         let singleComment = document.createElement('p');
-        singleComment.innerText = comments[i].comment;
+        singleComment.innerText = `Name: ${comments[i].name} 
+                                    Comment: ${comments[i].comment} ${comments[i].mood}`;
         allCommentsList.append(singleComment);
       }
     });
 }
+
 
 //Performs POST request to /delete-data and fetches data again so comments are deleted
 function deleteComments(){

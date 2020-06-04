@@ -40,7 +40,7 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     String quantityChosen = request.getParameter("number");
-
+    String commentOrder = request.getParameter("order");
     int amount;
     try {
         amount = Integer.parseInt(quantityChosen);
@@ -48,7 +48,12 @@ public class DataServlet extends HttpServlet {
         amount = 1;
     }
 
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query;
+    if (commentOrder != null && commentOrder.equals("newest")){
+        query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    } else {
+        query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    }
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -60,8 +65,10 @@ public class DataServlet extends HttpServlet {
       }
       String comment = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
+      String name = (String) entity.getProperty("name");
+      String mood = (String) entity.getProperty("mood");
 
-      Comment userComment = new Comment(comment, timestamp);
+      Comment userComment = new Comment(name, comment, timestamp, mood);
       comments.add(userComment);
       amount -= 1;
     }
@@ -74,12 +81,18 @@ public class DataServlet extends HttpServlet {
 
     //Receives submitted comment 
     String comment = request.getParameter("text-input");
+    String name = request.getParameter("name-input");
+    String mood = request.getParameter("mood");
     long timestamp = System.currentTimeMillis();
 
+    //Creates entity with submitted data
     Entity taskEntity = new Entity("Comment");
     taskEntity.setProperty("comment", comment);
     taskEntity.setProperty("timestamp", timestamp);
+    taskEntity.setProperty("name", name);
+    taskEntity.setProperty("mood", mood);
 
+    //Adds entity to database 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
