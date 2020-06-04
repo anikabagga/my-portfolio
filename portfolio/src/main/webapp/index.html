@@ -350,8 +350,20 @@
             </div>
 
             <form action="/data" method="POST">
-                <p>Enter here:</p>
-                <textarea name="text-input"></textarea>
+                <p>Name:</p>
+                <textarea id="name" name="name-input"></textarea>
+                <br/><br/>
+                <p>Comment:</p>
+                <textarea id="comment" name="text-input"></textarea>
+                <br/><br/>
+
+                <label for="mood">Mood:</label>
+                <select name="mood" id="mood" >
+                    <option value="happy">&#128522</option>
+                    <option value="heart">&#128525</option>
+                    <option value="surprised">&#128559</option>
+                    <option value="sad">&#128549</option>
+                </select>
                 <br/><br/>
                 <input type="submit" />
 
@@ -364,6 +376,14 @@
                     <option value="15">15</option>
                     <option value="20">20</option>
                 </select>
+
+                 <!-- Selector menu for order of comments -->
+                <label for="order">Choose order of comments:</label>
+                <select name="order" id="order" onchange="loadComments()">
+                    <option value="1">Newest First</option>
+                    <option value="5">Oldest First</option>
+                </select>
+
             </form>
 
             <!-- Delete all comments button -->

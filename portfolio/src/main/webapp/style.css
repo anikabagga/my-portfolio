@@ -741,3 +741,16 @@ h2{
     text-align: left;
   }
 }
+
+
+/* styling for comments section */
+
+#name {
+    width: 140px;
+    height: 30px;
+}
+
+#comment {
+    width: 200px;
+    height: 50px;
+}
