@@ -39,20 +39,32 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    String quantityChosen = request.getParameter("number");
+
+    int amount;
+    try {
+        amount = Integer.parseInt(quantityChosen);
+    } catch (NumberFormatException e) {
+        amount = 1;
+    }
+
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
+        
+      if (amount == 0) {
+          break;
+      }
       String comment = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
 
       Comment userComment = new Comment(comment, timestamp);
       comments.add(userComment);
+      amount -= 1;
     }
-     
     //Convert to json
     response.setContentType("application/json;");
     response.getWriter().println(new Gson().toJson(comments));

@@ -34,15 +34,22 @@ function sayHello(){
   });
 }
 
+window.onload = loadComments();
+
 //Retrieves json comments from server 
 function loadComments(){
-    fetch('/data').then(response => response.json()).then((comments) => {
+    
+    var commentsLimit = commentAmount();
+
+    fetch('/data?number=' + commentsLimit).then(response => response.json()).then((comments) => {
       const allCommentsList = document.getElementById('comments-container');
-      comments.forEach((sentComment) => {
-          let singleComment = document.createElement('p');
-          singleComment.innerText = sentComment.comment
-          allCommentsList.append(singleComment);
-      })
+      allCommentsList.innerHTML = '';
+      
+      for(var i = 0; i < commentsLimit; i++){
+        let singleComment = document.createElement('p');
+        singleComment.innerText = comments[i].comment;
+        allCommentsList.append(singleComment);
+      }
     });
 }
 
@@ -51,6 +58,15 @@ function deleteComments(){
     fetch('delete-data', {method: 'POST'})
         .then(loadComments());
 }
+
+//Returns choosen value of comments
+function commentAmount(){
+    var amount = document.getElementById("number");
+    var value = amount.value
+    return value
+}
+
+
 
 
 

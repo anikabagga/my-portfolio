@@ -354,10 +354,21 @@
                 <textarea name="text-input"></textarea>
                 <br/><br/>
                 <input type="submit" />
+
+                 <!-- Selector menu for how many comments to display -->
+                <label for="number">Choose number of comments to display:</label>
+                <select name="number" id="number" onchange="loadComments()">
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
             </form>
 
+            <!-- Delete all comments button -->
             <ul id="comments-container"></ul>
-            <button onClick="deleteComments()">delete all comments</button> 
+            <button onclick="deleteComments()">delete all comments</button> 
 
             <!-- Footer -->
             <div class= "row">
