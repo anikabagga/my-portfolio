@@ -22,6 +22,11 @@ body {
   margin-left: 50px;
 }
 
+.helper-text {
+    font-style: italic; 
+    margin-bottom: 20px;
+}
+
 h1 {
     font-family: 'Noto Sans';
     font-weight: 300;
