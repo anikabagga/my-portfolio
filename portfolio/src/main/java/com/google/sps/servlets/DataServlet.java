@@ -72,7 +72,7 @@ public class DataServlet extends HttpServlet {
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    //Recieves submitted comment 
+    //Receives submitted comment 
     String comment = request.getParameter("text-input");
     long timestamp = System.currentTimeMillis();
 
