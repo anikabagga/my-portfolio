@@ -745,12 +745,46 @@ h2{
 
 /* styling for comments section */
 
+textarea {
+    margin-bottom: 1em;
+    font-size: .9em;
+    color: #2E4455;
+    font-weight: 300;
+    font-family: 'Noto Sans';
+    padding: .5em 1em;
+    border-color: #2E4455;
+    width: 300px;
+}
+
 #name {
-    width: 140px;
-    height: 30px;
+    height: 40px;
 }
 
 #comment {
-    width: 200px;
-    height: 50px;
+    height: 100px;
+}
+
+#commments-container {
+    font-family: 'Noto Sans';
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.btn {
+    border: 0;
+    background-color: #2E4455;
+    padding: 15px 17px;
+    font-size: 14px;
+    line-height: 1.0;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: 'Noto Sans';
+    border-radius: 100px;
+}
+
+.btn:focus,.btn:active,
+.btn:hover {
+  background-color: #4A99A7;
+  color: white;
 }
