@@ -767,8 +767,19 @@ textarea {
 #commments-container {
     font-family: 'Noto Sans';
     font-weight: 200;
-    font-size: 20px;
+    font-size: 15px;
 }
+
+.drop-menu {
+     font-family: 'Noto Sans';
+    font-weight: 200;
+    font-size: 18px;
+}
+
+#order, #number, #mood {
+    margin-right: 20px;
+}
+
 
 .btn {
     border: 0;
@@ -781,6 +792,8 @@ textarea {
     color: #ffffff;
     font-family: 'Noto Sans';
     border-radius: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .btn:focus,.btn:active,

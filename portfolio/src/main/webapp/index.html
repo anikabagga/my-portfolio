@@ -357,12 +357,12 @@
                     <textarea id="comment" placeholder="Comment" name="text-input"></textarea>
                 </div>
                 <div class="row">
-                    <label for="mood">Mood:</label>
+                    <label class= "drop-menu" for="mood">React:</label>
                     <select name="mood" id="mood" >
-                        <option value="happy">&#128522</option>
-                        <option value="heart">&#128525</option>
-                        <option value="surprised">&#128559</option>
-                        <option value="sad">&#128549</option>
+                        <option value="&#128522">&#128522</option>
+                        <option value="&#128525">&#128525</option>
+                        <option value="&#128559">&#128559</option>
+                        <option value="&#128549">&#128549</option>
                     </select>
                 </div>
                 <div class="row">
@@ -371,7 +371,7 @@
 
                  <!-- Selector menu for how many comments to display -->
                 <div class="row">
-                    <label for="number">Choose number of comments to display:</label>
+                    <label class="drop-menu" for="number">Choose number of comments to display:</label>
                     <select name="number" id="number" onchange="loadComments()">
                         <option value="1">1</option>
                         <option value="5">5</option>
@@ -381,7 +381,7 @@
                     </select>
 
                     <!-- Selector menu for order of comments -->
-                    <label for="order">Choose order of comments:</label>
+                    <label class="drop-menu" for="order">Choose order of comments:</label>
                     <select name="order" id="order" onchange="loadComments()">
                         <option value="newest">Newest First</option>
                         <option value="oldest">Oldest First</option>

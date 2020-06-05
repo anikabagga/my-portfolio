@@ -15,17 +15,6 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
 
 //Prints Hello Anika on button click 
 function sayHello(){
@@ -47,29 +36,34 @@ function loadComments(){
       allCommentsList.innerHTML = '';
       
       for(var i = 0; i < commentsLimit; i++){
-        let singleComment = document.createElement('p');
+        let singleComment = document.createElement('div');
         var moodReceived = comments[i].mood;
+        
         if (moodReceived === "happy"){
-             singleComment.innerText = `Name: ${comments[i].name} 
-                                    Comment: ${comments[i].comment} 😊`;
+            singleComment.innerHTML = "<p> Name: " + sanitizeHTML(comments[i].name)                             + " <br /> Comment: " + sanitizeHTML(comments[i].comment) + "  😊 </p>";
         } else if(moodReceived === "heart"){
-            singleComment.innerText = `Name: ${comments[i].name} 
-                                    Comment: ${comments[i].comment} 😍`;
+            singleComment.innerHTML = "<p> Name: " + sanitizeHTML(comments[i].name)                             + " <br /> Comment: " + sanitizeHTML(comments[i].comment) + "  😍 </p>";
+            
         } else if(moodReceived === "surprised"){
-            singleComment.innerText = `Name: ${comments[i].name} 
-                                    Comment: ${comments[i].comment} 😯`;
+            singleComment.innerHTML = "<p> Name: " + sanitizeHTML(comments[i].name)                             + " <br /> Comment: " + sanitizeHTML(comments[i].comment) + "  😯 </p>";
+
         } else if(moodReceived === "sad"){
-            singleComment.innerText = `Name: ${comments[i].name} 
-                                    Comment: ${comments[i].comment} 😥`;
+            singleComment.innerHTML = "<p> Name: " + sanitizeHTML(comments[i].name)                             + " <br /> Comment: " + sanitizeHTML(comments[i].comment) + "  😥 </p>";
+            
         } else {
-              singleComment.innerText = `Name: ${comments[i].name} 
-                                    Comment: ${comments[i].comment} `;
+              singleComment.innerHTML = "<p> Name: " + sanitizeHTML(comments[i].name)                             + " <br /> Comment: " + sanitizeHTML(comments[i].comment) ;
         }
         allCommentsList.append(singleComment);
       }
     });
 }
 
+//Prevents HTML injection by removing markup from code
+function sanitizeHTML(str) {
+    var temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
+}
 
 //Performs POST request to /delete-data and fetches data again so comments are deleted
 function deleteComments(){
