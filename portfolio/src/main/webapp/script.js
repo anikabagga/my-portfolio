@@ -36,7 +36,10 @@ function loadComments(){
       allCommentsList.innerHTML = '';
       
       for(var i = 0; i < commentsLimit; i++){
-        allCommentsList.append(createSingleComment[i]);
+        //allCommentsList.appendChild(createSingleComment(comments[i]));
+        let singleComment = document.createElement('p');
+        singleComment.innerText = comments[i].comment;
+        allCommentsList.append(singleComment);
       }
     });
 }
@@ -59,7 +62,7 @@ function createSingleComment(comment){
     } else if(moodReceived === "sad"){
         commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment) + "  😥 ";
     } else {
-            commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment);
+        commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment);
     }
     commentDiv.appendChild(commentContent);
 
@@ -82,14 +85,14 @@ function sanitizeHTML(str) {
 
 //Performs POST request to /delete-data and fetches data again so comments are deleted
 function deleteComments(){
-    fetch('delete-data', {method: 'POST'})
+    fetch("/delete-data", {method: 'POST'})
         .then(loadComments());
 }
 
 //Performs POST request to /delete-single-comment and fetches remaining comments 
 function deleteSingleComment(comment){
     const id = comment.id;
-     fetch('delete-single-comment?id=' + id, {method: 'POST'})
+     fetch('/delete-single-comment?id=' + id, {method: 'POST'})
         .then(loadComments());
 }
 
@@ -105,7 +108,7 @@ const pages;
 const numberOfPages;
 
 //Disables button based on current page 
-function diableButton(){
+function disableButton(){
     const nextButton = document.getElementById('btnNext');
     const prevButton = document.getElementById('btnPrev');
     nextButton.disabled=false;

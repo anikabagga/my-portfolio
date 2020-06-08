@@ -42,6 +42,7 @@ public class DataServlet extends HttpServlet {
     String quantityChosen = request.getParameter("number");
     String commentOrder = request.getParameter("order");
     int amount;
+    
     try {
         amount = Integer.parseInt(quantityChosen);
     } catch (NumberFormatException e) {
