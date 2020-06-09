@@ -84,7 +84,6 @@ function sanitizeHTML(str) {
 
 // Performs POST request to /delete-data and fetches data again so comments are deleted
 function deleteComments() {
-  console.log("delete comments pressed");
   fetch("/delete-data", {method: 'POST'})
         .then(loadComments());
 }
@@ -92,7 +91,9 @@ function deleteComments() {
 // Performs POST request to /delete-single-comment and fetches remaining comments 
 function deleteSingleComment(comment) {
   const id = comment.id;
-  fetch('/delete-single-comment?id=' + id, {method: 'POST'})
+  const email = comment.email;
+  console.log(email);
+  fetch('/delete-single-comment?id=' + id + '&email=' + email, {method: 'POST'})
         .then(loadComments());
 }
 

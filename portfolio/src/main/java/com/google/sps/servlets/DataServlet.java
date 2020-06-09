@@ -31,11 +31,14 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private UserService userService = UserServiceFactory.getUserService();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -67,9 +70,10 @@ public class DataServlet extends HttpServlet {
       long timestamp = (long) entity.getProperty("timestamp");
       String name = (String) entity.getProperty("name");
       String mood = (String) entity.getProperty("mood");
+      String email = (String) entity.getProperty("email");
       long id = entity.getKey().getId();
 
-      Comment userComment = new Comment(name, comment, timestamp, mood, id);
+      Comment userComment = new Comment(name, comment, timestamp, mood, id, email);
       comments.add(userComment);
       amount -= 1;
     }
@@ -84,6 +88,7 @@ public class DataServlet extends HttpServlet {
     String comment = request.getParameter("text-input");
     String name = request.getParameter("name-input");
     String mood = request.getParameter("mood");
+    String email = userService.getCurrentUser().getEmail();
     long timestamp = System.currentTimeMillis();
 
     // Creates entity with submitted data
@@ -92,6 +97,7 @@ public class DataServlet extends HttpServlet {
     taskEntity.setProperty("timestamp", timestamp);
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("mood", mood);
+    taskEntity.setProperty("email", email);
 
     // Adds entity to database 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
