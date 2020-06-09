@@ -24,11 +24,9 @@ public class DeleteSingleComment extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
     long id = Long.parseLong(request.getParameter("id"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Key deleteEntry = KeyFactory.createKey("Comment", id);
     datastore.delete(deleteEntry);
-
   }
 }

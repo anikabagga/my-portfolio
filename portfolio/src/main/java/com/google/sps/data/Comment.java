@@ -17,23 +17,23 @@ public final class Comment {
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getComment(){
+    public String getComment() {
         return comment;
     }
 
-    public String getMood(){
+    public String getMood() {
         return mood;
     }
 
-    public long getTimestamp(){
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 }

@@ -44,25 +44,24 @@ public class DataServlet extends HttpServlet {
     int amount;
     
     try {
-        amount = Integer.parseInt(quantityChosen);
+      amount = Integer.parseInt(quantityChosen);
     } catch (NumberFormatException e) {
-        amount = 1;
+      amount = 1;
     }
 
     Query query;
-    if (commentOrder != null && commentOrder.equals("newest")){
-        query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    if (commentOrder != null && commentOrder.equals("newest")) {
+      query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     } else {
-        query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+      query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
     }
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-        
       if (amount == 0) {
-          break;
+        break;
       }
       String comment = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
@@ -74,31 +73,31 @@ public class DataServlet extends HttpServlet {
       comments.add(userComment);
       amount -= 1;
     }
-    //Convert to json
+    // Convert to json
     response.setContentType("application/json;");
     response.getWriter().println(new Gson().toJson(comments));
   }
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    //Receives submitted comment 
+    // Receives submitted comment 
     String comment = request.getParameter("text-input");
     String name = request.getParameter("name-input");
     String mood = request.getParameter("mood");
     long timestamp = System.currentTimeMillis();
 
-    //Creates entity with submitted data
+    // Creates entity with submitted data
     Entity taskEntity = new Entity("Comment");
     taskEntity.setProperty("comment", comment);
     taskEntity.setProperty("timestamp", timestamp);
     taskEntity.setProperty("name", name);
     taskEntity.setProperty("mood", mood);
 
-    //Adds entity to database 
+    // Adds entity to database 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
-    //Redirect back to the HTML page.
+    // Redirect back to the HTML page.
     response.sendRedirect("/index.html#comments-section");
   }
 }

@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
     String loginURL = userService.createLoginURL("/");
     String logoutURL = userService.createLogoutURL("/");
 
-     //Sends json formatted url and user email 
+    // Sends json formatted url and user email 
     if (userService.isUserLoggedIn()) {
       json += "\"url\":" + "\"" + logoutURL + "\",";
       json += "\"email\":" + "\"" + userService.getCurrentUser().getEmail() + "\""; 
