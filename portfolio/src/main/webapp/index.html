@@ -15,7 +15,7 @@
         <title>Anika Bagga</title>
     </div>
   </head>
-  <body onload="loadComments()">
+  <body onload="authentication()">
     <div id="content">
 
          <!-- Navigation Bar -->
@@ -349,57 +349,60 @@
                 <p class="helper-text">please fill out the form to leave a comment</p>
             </div>
 
-            <form action="/data" method="POST">
+            <div id="loginContainer"></div>
+            <div id="comments-area">
+                <form action="/data" method="POST">
+                    <div class="row">
+                        <textarea id="name" placeholder="Name" name="name-input" ></textarea>
+                    </div>
+                    <div class="row">
+                        <textarea id="comment" placeholder="Comment" name="text-input"></textarea>
+                    </div>
+                    <div class="row">
+                        <label class= "drop-menu" for="mood">React:</label>
+                        <select name="mood" id="mood" >
+                            <option value="&#128522">&#128522</option>
+                            <option value="&#128525">&#128525</option>
+                            <option value="&#128559">&#128559</option>
+                            <option value="&#128549">&#128549</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <input class="btn" type="submit" />
+                    </div>
+
+                    <!-- Selector menu for how many comments to display -->
+                    <div class="row">
+                        <label class="drop-menu" for="number">Choose number of comments to display:</label>
+                        <select name="number" id="number" onchange="loadComments()">
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+
+                        <!-- Selector menu for order of comments -->
+                        <label class="drop-menu" for="order">Choose order of comments:</label>
+                        <select name="order" id="order" onchange="loadComments()">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                </form>
+
+                
                 <div class="row">
-                    <textarea id="name" placeholder="Name" name="name-input" ></textarea>
-                </div>
-                <div class="row">
-                    <textarea id="comment" placeholder="Comment" name="text-input"></textarea>
-                </div>
-                <div class="row">
-                    <label class= "drop-menu" for="mood">React:</label>
-                    <select name="mood" id="mood" >
-                        <option value="&#128522">&#128522</option>
-                        <option value="&#128525">&#128525</option>
-                        <option value="&#128559">&#128559</option>
-                        <option value="&#128549">&#128549</option>
-                    </select>
-                </div>
-                <div class="row">
-                    <input class="btn" type="submit" />
+                    <button id="btnPrev" onclick="previousPage()" disabled=true> < </button>
+                    <button id="btnNext" onclick="nextPage()"> > </button>
                 </div>
 
-                 <!-- Selector menu for how many comments to display -->
+                <!-- Delete all comments button -->
+                <ul id="comments-container"></ul>
+
                 <div class="row">
-                    <label class="drop-menu" for="number">Choose number of comments to display:</label>
-                    <select name="number" id="number" onchange="loadComments()">
-                        <option value="1">1</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-
-                    <!-- Selector menu for order of comments -->
-                    <label class="drop-menu" for="order">Choose order of comments:</label>
-                    <select name="order" id="order" onchange="loadComments()">
-                        <option value="newest">Newest First</option>
-                        <option value="oldest">Oldest First</option>
-                    </select>
+                    <button class="btn" onclick="deleteComments()">delete all</button> 
                 </div>
-            </form>
-
-            
-            <div class="row">
-                <button id="btnPrev" onclick="previousPage()" disabled=true> < </button>
-                <button id="btnNext" onclick="nextPage()"> > </button>
-            </div>
-
-            <!-- Delete all comments button -->
-            <ul id="comments-container"></ul>
-
-            <div class="row">
-                <button class="btn" onclick="deleteComments()">delete all</button> 
             </div>
 
             <!-- Footer -->

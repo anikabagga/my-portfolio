@@ -23,7 +23,7 @@ function sayHello(){
   });
 }
 
-window.onload = loadComments();
+window.onload = authentication();
 
 //Retrieves json comments from server 
 function loadComments(){
@@ -103,9 +103,37 @@ function commentAmount(){
     return value
 }
 
-let currentPage = 0;
-const pages;
-const numberOfPages;
+let userLoggedIn = false;
+
+//Displays whether user is logged in based on servlet response
+function authentication(){
+    fetch('/login').then(response => response.json()).then(loginData => {
+    const loginContainer = document.getElementById("loginContainer");
+    if (loginData.email === null){
+        loginContainer.innerHTML = "<p>Login <a href=\"" + loginData.url + "\">here</a>.</p>";
+        userLoggedIn = false;
+    } else {
+        console.log(loginData.email);
+        loginContainer.innerHTML = "<p>You're logged in as " + loginData.email + "!\nLogout <a href=\""
+          + loginData.url + "\">here</a>.</p>";
+        userLoggedIn = true;
+    }
+    }).then(() => hideOrShowCommentsSection());
+}
+
+//Displays comments section if user is logged in 
+function hideOrShowCommentsSection(){
+    const commentsSection = document.getElementById("comments-area");
+    if (userLoggedIn) {
+        commentsSection.style.display = "block";
+    } else {
+        commentsSection.style.display = "none";
+    }
+}
+
+//let currentPage = 0;
+//const pages;
+//const numberOfPages;
 
 //Disables button based on current page 
 function disableButton(){
