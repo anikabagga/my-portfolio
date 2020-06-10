@@ -16,7 +16,7 @@
     </div>
   </head>
 
-  <body onload="authentication()">
+  <body onload="init()">
     <div id="content">
       <!-- Navigation Bar -->
       <nav role="navigation">
@@ -344,7 +344,7 @@
               <div id="loginContainer"></div>
             </div>
             <div id="comments-area">
-              <form id="comments-form" action="/data" method="POST">
+              <form id="comments-form" method="POST" enctype="multipart/form-data">
                 <div class="row">
                   <textarea id="name" placeholder="Name" name="name-input" ></textarea>
                 </div>
@@ -362,10 +362,10 @@
                 </div>
                 <div class="row">
                   <p class= "drop-menu">Upload an image:</p>
-                  <input class= "drop-menu" type="file" name="image">
+                  <input class= "drop-menu" type="file" name="image" onchange="fetchBlobstoreUrlAndShowForm()">
                 </div>
                 <div class="row">
-                  <input class="btn" type="submit" />
+                  <input class="btn" type="submit" onclick="fetchBlobstoreUrlAndShowForm()"/>
                 </div>
 
                 <!-- Selector menu for how many comments to display -->

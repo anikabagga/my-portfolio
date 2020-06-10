@@ -69,7 +69,7 @@ public class DataServlet extends HttpServlet {
       String mood = (String) entity.getProperty("mood");
       String email = (String) entity.getProperty("email");
       long id = entity.getKey().getId();
-      String imgURL = "";
+      String imgURL = (String) entity.getProperty("imageURL");
 
       Comment userComment = new Comment(name, comment, timestamp, mood, id, email, imgURL);
       comments.add(userComment);
@@ -87,7 +87,10 @@ public class DataServlet extends HttpServlet {
     String name = request.getParameter("name-input");
     String mood = request.getParameter("mood");
     String email = userService.getCurrentUser().getEmail();
-    String imageURL = getUploadedFileUrl(request, "image");
+    String imageURL = "";
+    if (getUploadedFileUrl(request, "image") != null){
+      imageURL = getUploadedFileUrl(request, "image");
+    }
     long timestamp = System.currentTimeMillis();
 
     // Creates entity with submitted data

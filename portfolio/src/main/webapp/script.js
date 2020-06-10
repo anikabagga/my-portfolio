@@ -25,6 +25,11 @@ function sayHello() {
 
 window.onload = authentication();
 
+function init() {
+  authentication();
+  fetchBlobstoreUrlAndShowForm();
+}
+
 // Retrieves json comments from server 
 function loadComments() {
     
@@ -87,17 +92,17 @@ function sanitizeHTML(str) {
   return temp.innerHTML;
 }
 
-// 
+// Gets URL for uploaded image
 function fetchBlobstoreUrlAndShowForm() {
   fetch('/blobstore-handler')
-      .then((response) => {
-        return response.text();
-      })
-      .then((imageUploadUrl) => {
-        const messageForm = document.getElementById('comments-form');
-        //messageForm.action = imageUploadUrl;
-        //messageForm.classList.remove('hidden');
-      });
+    .then((response) => {
+    return response.text();
+    })
+    .then((imageUploadUrl) => {
+    const messageForm = document.getElementById('comments-form');
+    messageForm.action = imageUploadUrl;
+    //messageForm.classList.remove('hidden');
+  });
 }
 
 // Performs POST request to /delete-data and fetches data again so comments are deleted
