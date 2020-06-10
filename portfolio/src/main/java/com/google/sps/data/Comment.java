@@ -1,6 +1,5 @@
 package com.google.sps.data;
 
-/** An item on a todo list. */
 public final class Comment {
 
     private final String name;
@@ -11,7 +10,7 @@ public final class Comment {
     private final String email;
     private final String imageURL;
 
-    public Comment(String name, String comment, long timestamp, String mood, long id, String email, String imgURL) {
+    public Comment(String name, String comment, long timestamp, String mood, long id, String email, String imageURL) {
         this.comment = comment;
         this.timestamp = timestamp;
         this.name = name;

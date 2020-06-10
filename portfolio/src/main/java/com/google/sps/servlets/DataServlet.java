@@ -1,19 +1,4 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package com.google.sps.servlets;
-
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +18,20 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.blobstore.BlobInfo;
+import com.google.appengine.api.blobstore.BlobInfoFactory;
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Map;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comment data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -72,8 +69,9 @@ public class DataServlet extends HttpServlet {
       String mood = (String) entity.getProperty("mood");
       String email = (String) entity.getProperty("email");
       long id = entity.getKey().getId();
+      String imgURL = "";
 
-      Comment userComment = new Comment(name, comment, timestamp, mood, id, email);
+      Comment userComment = new Comment(name, comment, timestamp, mood, id, email, imgURL);
       comments.add(userComment);
       amount -= 1;
     }

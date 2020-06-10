@@ -20,7 +20,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet handles request to delete single comment */
 @WebServlet("/delete-single-comment")
 public class DeleteSingleComment extends HttpServlet {
 
@@ -32,12 +32,9 @@ public class DeleteSingleComment extends HttpServlet {
     String userEmail = (String) userService.getCurrentUser().getEmail();
    
     if (commentEmail.equals(userEmail)) {
-      System.out.println("yay! you are allowed to delete your comment");
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key deleteEntry = KeyFactory.createKey("Comment", id);
       datastore.delete(deleteEntry);
-    } else {
-      System.out.println("you are not allowed to delete this comment");
     }
   }
 }
