@@ -1,4 +1,3 @@
-
 package com.google.sps.servlets;
 
 import java.io.IOException;
@@ -18,17 +17,24 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
-/** Servlet that deletes all comments */
-@WebServlet("/delete-data")
-public class DeleteComment extends HttpServlet {
+/** Servlet handles request to delete single comment */
+@WebServlet("/delete-single-comment")
+public class DeleteSingleComment extends HttpServlet {
 
+  private UserService userService = UserServiceFactory.getUserService();
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Query query = new Query("Comment");
-    for (Entity taskEntity : datastore.prepare(query).asIterable()) {
-      datastore.delete(taskEntity.getKey());
-   }
+    long id = Long.parseLong(request.getParameter("id"));
+    String commentEmail = request.getParameter("email");
+    String userEmail = (String) userService.getCurrentUser().getEmail();
+   
+    if (commentEmail.equals(userEmail)) {
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      Key deleteEntry = KeyFactory.createKey("Comment", id);
+      datastore.delete(deleteEntry);
+    }
   }
 }

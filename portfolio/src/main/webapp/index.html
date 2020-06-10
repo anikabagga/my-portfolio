@@ -12,374 +12,402 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <div class="head_title">
-        <title>Anika Bagga</title>
+      <title>Anika Bagga</title>
     </div>
   </head>
-  <body onload="loadComments()">
+
+  <body onload="authentication()">
     <div id="content">
+      <!-- Navigation Bar -->
+      <nav role="navigation">
+        <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <a href="#about-section"><li>about</li></a>
+          <a href="#activities-section"><li>activities & projects</li></a>
+          <a href="#skills-section"><li>skills</li></a>
+          <a href="#food-section"><li>food diary</li></a>
+          <a href="#comments-section"><li>comments</li></a>
+        </ul>
+        </div>
+      </nav>
 
-         <!-- Navigation Bar -->
-         <nav role="navigation">
-            <div id="menuToggle">
-   
-            <input type="checkbox" />
-
-            <span></span>
-            <span></span>
-            <span></span>
-        
-            <ul id="menu">
-                <a href="#about-section"><li>about</li></a>
-                <a href="#activities-section"><li>activities & projects</li></a>
-                <a href="#skills-section"><li>skills</li></a>
-                <a href="#food-section"><li>food diary</li></a>
-                <a href="#comments-section"><li>comments</li></a>
-            </ul>
-            </div>
-        </nav>
-
-       <!-- Bio Content -->
+      <!-- Bio Content -->
       <div id="bio">
         <a id="about-section" name="about-section"></a>
          <!-- Name Label -->
         <div class="container">
-            <div class="row row-name">
-                <div class="col-md-6" >
-                    <h1>Anika Bagga</h1>
-                </div>
+          <div class="row row-name">
+            <div class="col-md-6" >
+              <h1>Anika Bagga</h1>
             </div>
+          </div>
         </div>
 
          <!-- Profile Picutre -->
         <div class="container">
-            <div class="row row-bio">
-                <div class="col-md-2 float-md-right">
-                    <div class="profile-img">
-                        <img src="images/anika_bagga_headshot.JPG" alt="Anika's profile picture" width="250" height="250"/>
-                    </div>
-                </div>
+          <div class="row row-bio">
+            <div class="col-md-2 float-md-right">
+              <div class="profile-img">
+                <img src="images/anika_bagga_headshot.JPG" alt="Anika's profile picture" width="250" height="250"/>
+              </div>
+            </div>
 
                  <!-- Bio Text -->
-                <div class="col-md-6 bio-text" >
-                    <p>Welcome! &#128522 My name is Anika and I am currently a rising junior at UC Berkeley studying Computer Science and Data Science with a Certificate in Entrepreneurship and Technology. 
-                    
-                    <br> I enjoy developing software applications, dabbling in product design, and building inclusive communities in tech. </br>
-                    <br> You can also find me doing yoga &#129336, working on random artistic projects &#128391, and eating a bunch of Trader Joe's snacks &#129379</br>
-                    <br> Feel free to reach out! I'd love to chat! </br>
-                    
-                    </p>
+            <div class="col-md-6 bio-text" >
+              <p>Welcome! &#128522 My name is Anika and I am currently a rising junior at UC Berkeley studying Computer Science and Data Science with a Certificate in Entrepreneurship and Technology. 
+              <br> I enjoy developing software applications, dabbling in product design, and building inclusive communities in tech. </br>
+              <br> You can also find me doing yoga &#129336, working on random artistic projects &#128391, and eating a bunch of Trader Joe's snacks &#129379 </br>
+              <br> Feel free to reach out! I'd love to chat! </br>
+              </p>
 
-                     <!-- Social Media Links -->
-                    <ul class="social-icons-ul">
-                        <li><a href="https://www.linkedin.co/in/anikabagga/" target="_blank" class="social-icons">
-                                <i class="fa fa-linkedin"></i></a>
-                        </li>
-                        <li><a href="https://github.com/anikabagga" target="_blank" class="social-icons">
-                                <i class="fa fa-github"></i></a>
-                        </li>
-                        <li><a href="mailto:anikabagga@berkeley.edu" target="_blank" class="social-icons">
-                            <i class="fa fa-envelope"></i></a>
-                        </li>
-                        <li><a href="https://twitter.com/Anika80166068" target="_blank" class="social-icons">
-                            <i class="fa fa-twitter"></i></a>
-                        <li>
-                    </ul>
-                </div>
+                <!-- Social Media Links -->
+              <ul class="social-icons-ul">
+                <li><a href="https://www.linkedin.co/in/anikabagga/" target="_blank" class="social-icons">
+                        <i class="fa fa-linkedin"></i></a>
+                </li>
+                <li><a href="https://github.com/anikabagga" target="_blank" class="social-icons">
+                        <i class="fa fa-github"></i></a>
+                </li>
+                <li><a href="mailto:anikabagga@berkeley.edu" target="_blank" class="social-icons">
+                    <i class="fa fa-envelope"></i></a>
+                </li>
+                <li><a href="https://twitter.com/Anika80166068" target="_blank" class="social-icons">
+                    <i class="fa fa-twitter"></i></a>
+                <li>
+              </ul>
             </div>
+          </div>
         </div>
+
          <!-- Activities Label -->
         <div class="container">
-            <a id="activities-section" name="activities-section"></a>
-            <div class= "row">
-                <h2><span class="underline-magical">activities & projects</span></h2>
-                <p class="helper-text">highlights from what i've worked on</p>
-
-            </div>
+          <a id="activities-section" name="activities-section"></a>
+          <div class= "row">
+            <h2><span class="underline-magical">activities & projects</span></h2>
+            <p class="helper-text">highlights from what i've worked on</p>
+          </div>
         </div>
+
          <!-- Timeline of Activities -->
         <div class="container">
-            <div class= "row">
-                <div class="timeline">
-                    <!-- Item 1 -->
-                    <li>
-                        <div class="direction-r">
-                        <div class="flag-wrapper">
-                            <span class="hexa t-mobile-hexa"></span>
-                            <span class="flag">Software Engineering Intern</span>
-                            <span class="time-wrapper"><span class="tab t-mobile-tab">T-Mobile</span></span>
-                        </div>
-                        <div class="desc">Built an iOS application for the RF Engineering team. Wrote PHP, Python, and SQL scripts to connect to backend database.
-                            Designed high-fidelity app-mock-ups, conducted interview to solidify app designs, and created unit-tests. 
-                        </div>
-                        </div>
-                    </li>
-
-                    <!-- Item 2 -->
-                    <li>
-                        <div class="direction-l">
-                        <div class="flag-wrapper">
-                            <span class="hexa mdb-hexa"></span>
-                            <span class="flag">iOS Developer</span>
-                            <span class="time-wrapper"><span class="tab mdb-tab">Mobile Developers of Berkeley</span></span>
-                        </div>
-                        <div class="desc">UC Berkeley's premier mobile development incubator that focuses on ideation, design, and implementation of unique mobile applications. 
-                            Published Bear Central, an iOS application for UC Berkeley students on the app store. 
-                        </div>
-                        </div>
-                    </li>
-
-                    <!-- Item 3 -->
-                    <li>
-                        <div class="direction-r">
-                        <div class="flag-wrapper">
-                            <span class="hexa femtech-hexa"></span>
-                            <span class="flag">Co-President</span>
-                            <span class="time-wrapper"><span class="tab femtech-tab">FEMTech Berkeley</span></span>
-                        </div>
-                        <div class="desc">Organize mentorship programs, training workshops, and hackathons to support female students from all majors to excel in careers in tech, 
-                            regardless of experience and background, and promote diversity in the tech industry. 
-                        </div>
-                        </div>
-                    </li>
-
-                    <!-- Item 4 -->
-                    <li>
-                        <div class="direction-l">
-                        <div class="flag-wrapper">
-                            <span class="hexa periodic-hexa"></span>
-                            <span class="flag">Cal Hacks Fellow</span>
-                            <span class="time-wrapper"><span class="tab periodic-tab">Periodic</span></span>
-                        </div>
-                        <div class="desc">Developed an iOS app aimed at helping low-income women who lack access to feminine hygiene products. App facilitated a monthly customized
-                            delivery of products, in which for every box purchases, a box of products would be donated. Developed using Swift, Firebase, and Postmates API. 
-                        </div>
-                        </div>
-                    </li>
-
-                    <!-- Item 5 -->
-                    <li>
-                        <div class="direction-r">
-                        <div class="flag-wrapper">
-                            <span class="hexa step-hexa"></span>
-                            <span class="flag">Clear Campaign</span>
-                            <span class="time-wrapper"><span class="tab step-tab">UC Berkeley StEP</span></span>
-                        </div>
-                        <div class="desc"> Worked on a platform for students running in university senate elections to easily reach their voters through a recommendation system, 
-                            social media engagements, and competitor analysis. This platform uses data analytics to reduce the amount of manual work campaigns have to go through 
-                            while running for office. 
-                        </div>
-                        </div>
-                    </li>
-
-                    <!-- Item 6 -->
-                    <li>
-                        <div class="direction-l">
-                        <div class="flag-wrapper">
-                            <span class="hexa ursatech-hexa"></span>
-                            <span class="flag">Developer</span>
-                            <span class="time-wrapper"><span class="tab ursatech-tab">Ursatech</span></span>
-                        </div>
-                        <div class="desc">Develop technical projects for university-affiliated groups and offer pro-bono consulting services to the UC Berkeley community. 
-                        </div>
-                        </div>
-                    </li>
-
+          <div class= "row">
+            <div class="timeline">
+              
+              <!-- Item 1 -->
+              <li>
+                <div class="direction-r">
+                <div class="flag-wrapper">
+                  <span class="hexa t-mobile-hexa"></span>
+                  <span class="flag">Software Engineering Intern</span>
+                  <span class="time-wrapper"><span class="tab t-mobile-tab">T-Mobile</span></span>
                 </div>
+                <div class="desc">Built an iOS application for the RF Engineering team. Wrote PHP, Python, and SQL scripts to connect to backend database. Designed high-fidelity app-mock-ups, conducted interview to solidify app designs, and created unit-tests. 
+                </div>
+                </div>
+              </li>
+
+              <!-- Item 2 -->
+              <li>
+                <div class="direction-l">
+                <div class="flag-wrapper">
+                  <span class="hexa mdb-hexa"></span>
+                  <span class="flag">iOS Developer</span>
+                  <span class="time-wrapper"><span class="tab mdb-tab">Mobile Developers of Berkeley</span></span>
+                </div>
+                <div class="desc">UC Berkeley's premier mobile development incubator that focuses on ideation, design, and implementation of unique mobile applications. Published Bear Central, an iOS application for UC Berkeley students on the app store. 
+                </div>
+                </div>
+              </li>
+
+              <!-- Item 3 -->
+              <li>
+                <div class="direction-r">
+                <div class="flag-wrapper">
+                  <span class="hexa femtech-hexa"></span>
+                  <span class="flag">Co-President</span>
+                  <span class="time-wrapper"><span class="tab femtech-tab">FEMTech Berkeley</span></span>
+                </div>
+                <div class="desc">Organize mentorship programs, training workshops, and hackathons to support female students from all majors to excel in careers in tech, regardless of experience and background, and promote diversity in the tech industry. 
+                </div>
+                </div>
+              </li>
+
+              <!-- Item 4 -->
+              <li>
+                <div class="direction-l">
+                <div class="flag-wrapper">
+                  <span class="hexa periodic-hexa"></span>
+                  <span class="flag">Cal Hacks Fellow</span>
+                  <span class="time-wrapper"><span class="tab periodic-tab">Periodic</span></span>
+                </div>
+                <div class="desc">Developed an iOS app aimed at helping low-income women who lack access to feminine hygiene products. App facilitated a monthly customized delivery of products, in which for every box purchases, a box of products would be donated. Developed using Swift, Firebase, and Postmates API. 
+                </div>
+                </div>
+              </li>
+
+              <!-- Item 5 -->
+              <li>
+                <div class="direction-r">
+                <div class="flag-wrapper">
+                  <span class="hexa step-hexa"></span>
+                  <span class="flag">Clear Campaign</span>
+                  <span class="time-wrapper"><span class="tab step-tab">UC Berkeley StEP</span></span>
+                </div>
+                <div class="desc"> Worked on a platform for students running in university senate elections to easily reach their voters through a recommendation system, social media engagements, and competitor analysis. This platform uses data analytics to reduce the amount of manual work campaigns have to go through 
+                while running for office. 
+                </div>
+                </div>
+              </li>
+
+              <!-- Item 6 -->
+              <li>
+                <div class="direction-l">
+                <div class="flag-wrapper">
+                  <span class="hexa ursatech-hexa"></span>
+                  <span class="flag">Developer</span>
+                  <span class="time-wrapper"><span class="tab ursatech-tab">Ursatech</span></span>
+                </div>
+                <div class="desc">Develop technical projects for university-affiliated groups and offer pro-bono consulting services to the UC Berkeley community. 
+                </div>
+                </div>
+              </li>
+
             </div>
+          </div>
         </div>
 
         <!-- Skills Label -->
         <div class="container">
-            <div class= "row">
-                <a id="skills-section" name="skills-section"></a>
-                <h2><span class="underline-magical">skills</span></h2>
-                <p class="helper-text">work in progress</p>
-            </div>
+          <div class= "row">
+            <a id="skills-section" name="skills-section"></a>
+            <h2><span class="underline-magical">skills</span></h2>
+            <p class="helper-text">work in progress</p>
+          </div>
 
-            <div class= "row">
-                <div class="col-md-2">
-                    <div class="tag tag1">Java</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag1">HTML</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag1">Swift</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag1">Python</div>
-                </div>
+          <div class= "row">
+            <div class="col-md-2">
+              <div class="tag tag1">Java</div>
             </div>
-
-            <div class= "row">
-                <div class="col-md-2">
-                    <div class="tag tag2">C++</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag2">CSS 3</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag2">PHP</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag2">Pandas</div>
-                </div>
+            <div class="col-md-2 ">
+              <div class="tag tag1">HTML</div>
             </div>
-
-            <div class= "row">
-                <div class="col-md-2">
-                    <div class="tag tag3">SQL</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag3">JSON</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag3">RESTful API's</div>
-                </div>
-                <div class="col-md-2 ">
-                    <div class="tag tag3">Numpy/Seaborn</div>
-                </div>
+            <div class="col-md-2 ">
+              <div class="tag tag1">Swift</div>
             </div>
+            <div class="col-md-2 ">
+              <div class="tag tag1">Python</div>
+            </div>
+          </div>
 
+          <div class= "row">
+            <div class="col-md-2">
+             <div class="tag tag2">C++</div>
+            </div>
+            <div class="col-md-2 ">
+              <div class="tag tag2">CSS 3</div>
+            </div>
+            <div class="col-md-2 ">
+              <div class="tag tag2">PHP</div>
+            </div>
+            <div class="col-md-2 ">
+              <div class="tag tag2">Pandas</div>
+            </div>
+          </div>
+
+          <div class= "row">
+            <div class="col-md-2">
+              <div class="tag tag3">SQL</div>
+            </div>
+            <div class="col-md-2 ">
+              <div class="tag tag3">JSON</div>
+            </div>
+            <div class="col-md-2 ">
+              <div class="tag tag3">RESTful API's</div>
+            </div>
+            <div class="col-md-2 ">
+              <div class="tag tag3">Numpy/Seaborn</div>
+            </div>
+          </div>
         </div>
         
-         <!-- Food Gallery Label -->
+        <!-- Food Gallery Label -->
         <div class="container">
-            <div class= "row">
-                <a id="food-section" name="food-section"></a>
-                <h2><span class="underline-magical food-diary">food diary</span></h2>
-                <p class="helper-text">a few of my favorite local eats</p>
-            </div>
+          <div class= "row">
+            <a id="food-section" name="food-section"></a>
+            <h2><span class="underline-magical food-diary">food diary</span></h2>
+            <p class="helper-text">a few of my favorite local eats</p>
+          </div>
 
-             <!--Food Gallery Images -->
-            <div class="row ">
-                <div class="caption-style-1">
-                    <div class="col-md-3 ">
-                        <div class="food-img ">
-                            <img src="images/food5.jpg" alt />
-                            <div class="caption">
-                                <div class="caption-text">
-                                    <p>Gourmonade <br>San Francisco, CA</p>
-                                </div>
-                            </div>		
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="food-img">
-                            <img src="images/food6.jpg" alt />
-                            <div class="caption">
-                                <div class="caption-text">
-                                    <p>Two Hands <br>Little Italy, NY</p>
-                                </div>
-                            </div>	
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="food-img">
-                            <img src="images/food3.jpg" alt />
-                            <div class="caption">
-                                <div class="caption-text">
-                                    <p>Home <br>San Francisco, CA</p>
-                                </div>
-                            </div>	
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="food-img">
-                            <img src="images/food4.jpg" alt />
-                            <div class="caption">
-                                <div class="caption-text">
-                                    <p>Ippudo<br>San Francisco, CA</p>
-                                </div>
-                            </div>	
-                        </div>
-                    </div>   
+          <!-- Food Gallery Images -->
+          <div class="row ">
+            <div class="caption-style-1">
+              <div class="col-md-3 ">
+                <div class="food-img ">
+                    <img src="images/food5.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Gourmonade <br>San Francisco, CA</p>
+                      </div>
+                    </div>		
+                  </div>
                 </div>
+                <div class="col-md-3 ">
+                  <div class="food-img">
+                    <img src="images/food6.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Two Hands <br>Little Italy, NY</p>
+                      </div>
+                    </div>	
+                  </div>
+                </div>
+                <div class="col-md-3 ">
+                  <div class="food-img">
+                    <img src="images/food3.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Home <br>San Francisco, CA</p>
+                      </div>
+                    </div>	
+                  </div>
+                </div>
+                <div class="col-md-3 ">
+                   <div class="food-img">
+                    <img src="images/food4.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Ippudo<br>San Francisco, CA</p>
+                      </div>
+                    </div>	
+                  </div>
+                </div>   
+              </div>
             </div>
 
             <div class="row food-second">
-                <div class="caption-style-1">
-                    <div class="col-md-3">
-                        <div class="food-img">
-                            <img src="images/food1-new.jpg" alt />
-                                <div class="caption">
-                                    <div class="caption-text">
-                                        <p>Old Town Mexican Cafe<br>San Diego, CA</p>
-                                    </div>
-                                </div>	
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="food-img">
-                            <img src="images/food2.jpg" alt />
-                                <div class="caption">
-                                    <div class="caption-text">
-                                        <p>Palm Acai Cafe<br>Berkeley, CA</p>
-                                    </div>
-                                </div>	
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="food-img">
-                            <img src="images/food7.jpg" alt />
-                             <div class="caption">
-                                    <div class="caption-text">
-                                        <p>Berkeley Social Club<br>Berkeley, CA</p>
-                                    </div>
-                                </div>	
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="food-img">
-                            <img src="images/food8.jpg" alt />
-                                <div class="caption">
-                                    <div class="caption-text">
-                                        <p>Holy Matcha<br>San Diego, CA</p>
-                                    </div>
-                                </div>	
-                        </div>
-                    </div>   
+              <div class="caption-style-1">
+                <div class="col-md-3">
+                  <div class="food-img">
+                    <img src="images/food1-new.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Old Town Mexican Cafe<br>San Diego, CA</p>
+                      </div>
+                    </div>	
+                  </div>
                 </div>
+                <div class="col-md-3 ">
+                  <div class="food-img">
+                    <img src="images/food2.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Palm Acai Cafe<br>Berkeley, CA</p>
+                      </div>
+                    </div>	
+                  </div>
+                </div>
+                <div class="col-md-3 ">
+                  <div class="food-img">
+                    <img src="images/food7.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Berkeley Social Club<br>Berkeley, CA</p>
+                      </div>
+                    </div>	
+                  </div>
+                </div>
+                <div class="col-md-3 ">
+                  <div class="food-img">
+                    <img src="images/food8.jpg" alt />
+                    <div class="caption">
+                      <div class="caption-text">
+                        <p>Holy Matcha<br>San Diego, CA</p>
+                      </div>
+                    </div>	
+                  </div>
+                </div>   
+              </div>
             </div>
 
-             <!-- Comments Form -->
-             <div class= "row">
-                <a id="comments-section" name="comments-section"></a>
-                <h2><span class="underline-magical food-diary">comments</span></h2>
-                <p class="helper-text">please fill out the form to leave a comment</p>
+            <!-- Comments Form -->
+            <div class= "row">
+              <a id="comments-section" name="comments-section"></a>
+              <h2><span class="underline-magical food-diary">comments</span></h2>
+              <p id="login-text" class="helper-text"></p>
             </div>
 
-            <form action="/data" method="POST">
-                <p>Enter here:</p>
-                <textarea name="text-input"></textarea>
-                <br/><br/>
-                <input type="submit" />
+            <div class= "row">
+              <div id="loginContainer"></div>
+            </div>
+            <div id="comments-area">
+              <form id="comments-form" action="/data" method="POST">
+                <div class="row">
+                  <textarea id="name" placeholder="Name" name="name-input" ></textarea>
+                </div>
+                <div class="row">
+                  <textarea id="comment" placeholder="Comment" name="text-input"></textarea>
+                </div>
+                <div class="row">
+                  <label class= "drop-menu" for="mood">React:</label>
+                  <select name="mood" id="mood" >
+                    <option value="&#128522">&#128522</option>
+                    <option value="&#128525">&#128525</option>
+                    <option value="&#128559">&#128559</option>
+                    <option value="&#128549">&#128549</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <p class= "drop-menu">Upload an image:</p>
+                  <input class= "drop-menu" type="file" name="image">
+                </div>
+                <div class="row">
+                  <input class="btn" type="submit" />
+                </div>
 
-                 <!-- Selector menu for how many comments to display -->
-                <label for="number">Choose number of comments to display:</label>
-                <select name="number" id="number" onchange="loadComments()">
+                <!-- Selector menu for how many comments to display -->
+                <div class="row">
+                  <label class="drop-menu" for="number">Choose number of comments to display:</label>
+                 <select name="number" id="number" onchange="loadComments()">
                     <option value="1">1</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
-                </select>
-            </form>
+                  </select>
 
-            <!-- Delete all comments button -->
-            <ul id="comments-container"></ul>
-            <button onclick="deleteComments()">delete all comments</button> 
+                  <!-- Selector menu for order of comments -->
+                  <label class="drop-menu" for="order">Choose order of comments:</label>
+                  <select name="order" id="order" onchange="loadComments()">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                  </select>
+                </div>
+              </form>
+
+              <div class="row">
+                <button id="btnPrev" onclick="previousPage()" disabled=true> < </button>
+                <button id="btnNext" onclick="nextPage()"> > </button>
+              </div>
+
+              <!-- Delete all comments button -->
+              <ul id="comments-container"></ul>
+
+              <div class="row">
+                <button class="btn" onclick="deleteComments()">delete all</button> 
+              </div>
+            </div>
 
             <!-- Footer -->
             <div class= "row">
-                <div class="footer">
-                 <center><p>Made with <i class="fa fa-heart pulse"></i>  in Bay Area, CA</p></ce
+              <div class="footer">
+                <center><p>Made with <i class="fa fa-heart pulse"></i>  in Bay Area, CA</p></center>
+               </div>
             </div>
-        
         </div>
-
       </div>
-    </div>
-
   </body>
 </html>
