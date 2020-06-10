@@ -743,12 +743,14 @@ textarea {
   font-family: 'Noto Sans';
   font-weight: 200;
   font-size: 18px;
+  color: #2E4455;
 }
 
 .comments-text {
   font-family: 'Open Sans';
   font-weight: 200;
   font-size: 18px;
+  color: #999999;
 }
 
 .drop-menu {
@@ -780,13 +782,14 @@ textarea {
   border: 0;
   background-color: #4A99A7;
   font-size: 12px;
+  padding: 8px 10px;
   line-height: 1.0;
   font-weight: 500;
   color: #ffffff;
   font-family: 'Noto Sans';
   border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .btn:focus,.btn:active,

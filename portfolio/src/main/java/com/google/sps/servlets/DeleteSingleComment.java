@@ -30,9 +30,7 @@ public class DeleteSingleComment extends HttpServlet {
     long id = Long.parseLong(request.getParameter("id"));
     String commentEmail = request.getParameter("email");
     String userEmail = (String) userService.getCurrentUser().getEmail();
-    System.out.println(commentEmail);
-    System.out.println(userEmail);
-
+   
     if (commentEmail.equals(userEmail)) {
       System.out.println("yay! you are allowed to delete your comment");
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

@@ -337,12 +337,14 @@
             <div class= "row">
               <a id="comments-section" name="comments-section"></a>
               <h2><span class="underline-magical food-diary">comments</span></h2>
-              <p class="helper-text">please fill out the form to leave a comment</p>
+              <p id="login-text" class="helper-text"></p>
             </div>
 
-            <div id="loginContainer"></div>
+            <div class= "row">
+              <div id="loginContainer"></div>
+            </div>
             <div id="comments-area">
-              <form action="/data" method="POST">
+              <form id="comments-form" action="/data" method="POST">
                 <div class="row">
                   <textarea id="name" placeholder="Name" name="name-input" ></textarea>
                 </div>
@@ -357,6 +359,10 @@
                     <option value="&#128559">&#128559</option>
                     <option value="&#128549">&#128549</option>
                   </select>
+                </div>
+                <div class="row">
+                  <p class= "drop-menu">Upload an image:</p>
+                  <input class= "drop-menu" type="file" name="image">
                 </div>
                 <div class="row">
                   <input class="btn" type="submit" />

@@ -46,22 +46,27 @@ function createSingleComment(comment) {
 
   const nameTitle = document.createElement('h3');
   nameTitle.className = "comments-name"
-  nameTitle.innerHTML = "Name: " + sanitizeHTML(comment.name);
+  nameTitle.innerText = sanitizeHTML(comment.name);
   commentDiv.appendChild(nameTitle);
+
+  const emailContent = document.createElement('p');
+  emailContent.className = "comments-text"
+  emailContent.innerText = comment.email;
+  commentDiv.appendChild(emailContent);
 
   const commentContent = document.createElement('p');
   commentContent.className = "comments-text"
   const moodReceived = comment.mood;
   if (moodReceived === "happy") {
-    commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment) + "  😊 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😊 ";
   } else if (moodReceived === "heart") {
-    commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment) + "  😍 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😍 ";
   } else if (moodReceived === "surprised") {
-    commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment) + "  😯 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😯 ";
   } else if (moodReceived === "sad") {
-    commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment) + "  😥 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😥 ";
   } else {
-    commentContent.innerHTML = "Comment: " + sanitizeHTML(comment.comment);
+    commentContent.innerHTML = sanitizeHTML(comment.comment);
   }
   commentDiv.appendChild(commentContent);
 
@@ -80,6 +85,19 @@ function sanitizeHTML(str) {
   const temp = document.createElement('div');
   temp.textContent = str;
   return temp.innerHTML;
+}
+
+// 
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-handler')
+      .then((response) => {
+        return response.text();
+      })
+      .then((imageUploadUrl) => {
+        const messageForm = document.getElementById('comments-form');
+        //messageForm.action = imageUploadUrl;
+        //messageForm.classList.remove('hidden');
+      });
 }
 
 // Performs POST request to /delete-data and fetches data again so comments are deleted
@@ -109,13 +127,14 @@ let userLoggedIn = false;
 // Displays whether user is logged in based on servlet response
 function authentication() {
   fetch('/login').then(response => response.json()).then(loginData => {
-    const loginContainer = document.getElementById("loginContainer");
+    const loginContainer = document.getElementById("login-text");
+    loginContainer.className = "helper-text";
     if (loginData.email === null) {
-      loginContainer.innerHTML = "<p>Login <a href=\"" + loginData.url + "\">here</a>.</p>";
+      loginContainer.innerHTML = "<p>please login to view comments. login <a href=\"" + loginData.url + "\">here</a>.</p>";
       userLoggedIn = false;
     } else {
       console.log(loginData.email);
-      loginContainer.innerHTML = "<p>You're logged in as " + loginData.email + "!\nLogout <a href=\""
+      loginContainer.innerHTML = "<p>you are logged in as " + loginData.email + "!\nlogout <a href=\""
         + loginData.url + "\">here</a>.</p>";
       userLoggedIn = true;
     }

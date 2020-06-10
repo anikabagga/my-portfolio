@@ -9,14 +9,16 @@ public final class Comment {
     private final String mood;
     private final long id;
     private final String email;
+    private final String imageURL;
 
-    public Comment(String name, String comment, long timestamp, String mood, long id, String email) {
+    public Comment(String name, String comment, long timestamp, String mood, long id, String email, String imgURL) {
         this.comment = comment;
         this.timestamp = timestamp;
         this.name = name;
         this.mood = mood;
         this.id = id;
         this.email = email;
+        this.imageURL = imageURL;
     }
 
     public String getName() {
@@ -41,5 +43,9 @@ public final class Comment {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 }
