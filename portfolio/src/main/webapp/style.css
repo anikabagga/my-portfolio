@@ -763,6 +763,11 @@ textarea {
   margin-right: 20px;
 }
 
+.uploadedImage {
+    max-width: 80%;
+    max-height: 25%;
+}
+
 .btn {
   border: 0;
   background-color: #2E4455;
@@ -778,9 +783,29 @@ textarea {
   margin-bottom: 10px;
 }
 
+#btnPrev, #btnNext {
+  border: 0;
+  background-color: #2E4455;
+  padding: 15px 17px;
+  font-size: 14px;
+  line-height: 1.0;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #ffffff;
+  font-family: 'Noto Sans';
+  border-radius: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btnPrev:disabled, .btnNext:disabled {
+    background-color:  #999999;;
+    color: #ffffff;
+}
+
 .single-delete-btn {
   border: 0;
-  background-color: #4A99A7;
+  background-color: #3C6F7F;
   font-size: 12px;
   padding: 8px 10px;
   line-height: 1.0;

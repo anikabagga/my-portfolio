@@ -43,7 +43,7 @@ function loadComments() {
 
     if (commentsLimit === Number.MAX_VALUE) {
       numberOfPages = 1;
-      for (var i = 0; i < commentsLimit; i++) {
+      for (var i = 0; i < comments.length; i++) {
         allCommentsList.appendChild(createSingleComment(comments[i]));
       }
     } else {
@@ -52,25 +52,38 @@ function loadComments() {
       console.log("number of pages" + numberOfPages);
       for (var i = currentPage * commentsLimit; i < currentPage * commentsLimit + commentsLimit; i++) {
         allCommentsList.appendChild(createSingleComment(comments[i]));
-        console.log("index" + i);
       }
     }
-    
   });
 }
 
 function createSingleComment(comment) {
   const commentDiv = document.createElement('div');
+  commentDiv.className = "row";
+
+  const imageDiv = document.createElement('div');
+  imageDiv.className = "col-md-3";
+  const contentDiv = document.createElement('div');
+  if (comment.imageURL != null) {
+    let imageContent = document.createElement('img');
+    imageContent.className = "uploadedImage";
+    imageContent.src = comment.imageURL;
+    imageDiv.appendChild(imageContent);
+    commentDiv.appendChild(imageDiv);
+    contentDiv.className = "col-md-9";
+  } else {
+    contentDiv.className = "col-md-12";
+  }
 
   const nameTitle = document.createElement('h3');
   nameTitle.className = "comments-name"
   nameTitle.innerText = sanitizeHTML(comment.name);
-  commentDiv.appendChild(nameTitle);
+  contentDiv.append(nameTitle);
 
   const emailContent = document.createElement('p');
   emailContent.className = "comments-text"
   emailContent.innerText = comment.email;
-  commentDiv.appendChild(emailContent);
+  contentDiv.appendChild(emailContent);
 
   const commentContent = document.createElement('p');
   commentContent.className = "comments-text"
@@ -86,23 +99,16 @@ function createSingleComment(comment) {
   } else {
     commentContent.innerHTML = sanitizeHTML(comment.comment);
   }
-  commentDiv.appendChild(commentContent);
+  contentDiv.appendChild(commentContent);
 
-  //commentDiv.appendChild('<img src="' + comment.imageURL + '"/>');
-
-  if (comment.imageURL != null) {
-    let imageContent = document.createElement('img');
-    imageContent.src = '"' + comment.imageUrl + '"';
-    commentDiv.appendChild(imageContent);
-  }
- 
   const deleteCommentBtn = document.createElement("button");
   deleteCommentBtn.className = "single-delete-btn"
   deleteCommentBtn.innerText = "delete";
   deleteCommentBtn.addEventListener('click', () => {
     deleteSingleComment(comment);
   });
-  commentDiv.appendChild(deleteCommentBtn);
+  contentDiv.appendChild(deleteCommentBtn);
+  commentDiv.appendChild(contentDiv);
   return commentDiv;
 }
 
@@ -136,7 +142,6 @@ function deleteComments() {
 function deleteSingleComment(comment) {
   const id = comment.id;
   const email = comment.email;
-  console.log(email);
   fetch('/delete-single-comment?id=' + id + '&email=' + email, {method: 'POST'})
         .then(loadComments());
 }
@@ -171,7 +176,6 @@ function authentication() {
       loginContainer.innerHTML = "<p>please login to view comments. login <a href=\"" + loginData.url + "\">here</a>.</p>";
       userLoggedIn = false;
     } else {
-      console.log(loginData.email);
       loginContainer.innerHTML = "<p>you are logged in as " + loginData.email + "!\nlogout <a href=\""
         + loginData.url + "\">here</a>.</p>";
       userLoggedIn = true;
@@ -199,20 +203,25 @@ function disableButton() {
   const prevButton = document.getElementById('btnPrev');
   nextButton.disabled = false;
   prevButton.disabled = false;
+  console.log("in wrong disable");
   if (currentPage === 0) {
+    console.log("in wrong1 disable");
     btnNext.disabled = false;
     btnPrev.disabled = true;
-  } else if (currentPage === numberOfPages - 1) {
+  } else if (currentPage === numberOfPages - 1 && currentPage != 0) {
+    console.log("in wrong2 disable");
     btnNext.disabled = true;
     btnPrev.disabled = false;
-  } 
+  } else if (currentPage === numberOfPages - 1  && currentPage === 0) {
+    console.log("in right disable");
+    btnNext.disabled = true;
+    btnPrev.disabled = true;
+  }
 }
 
 // Moves to next page if available
 function nextPage() {
-  console.log("next button pressed");
   if (currentPage < numberOfPages - 1) {
-    console.log("in next button");
     currentPage += 1;
     disableButton();
     loadComments();
@@ -221,9 +230,7 @@ function nextPage() {
 
 // Moves to previous page if available
 function previousPage() {
-  console.log("previous button pressed");
   if (currentPage > 0) {
-    console.log("in previous button");
     currentPage -= 1;
     disableButton();
     loadComments();
