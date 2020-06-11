@@ -39,16 +39,10 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    String quantityChosen = request.getParameter("number");
+    //String quantityChosen = request.getParameter("number");
     String commentOrder = request.getParameter("order");
-    int amount;
+   // int amount;
     
-    try {
-      amount = Integer.parseInt(quantityChosen);
-    } catch (NumberFormatException e) {
-      amount = 1;
-    }
-
     Query query;
     if (commentOrder != null && commentOrder.equals("newest")) {
       query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
@@ -60,9 +54,9 @@ public class DataServlet extends HttpServlet {
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      if (amount == 0) {
-        break;
-      }
+      //if (amount == 0) {
+      //  break;
+      //}
       String comment = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
       String name = (String) entity.getProperty("name");
@@ -70,10 +64,10 @@ public class DataServlet extends HttpServlet {
       String email = (String) entity.getProperty("email");
       long id = entity.getKey().getId();
       String imgURL = (String) entity.getProperty("imageURL");
-
+      System.out.println("iMG url" + imgURL);
       Comment userComment = new Comment(name, comment, timestamp, mood, id, email, imgURL);
       comments.add(userComment);
-      amount -= 1;
+      //amount -= 1;
     }
     // Convert to json
     response.setContentType("application/json;");
@@ -87,10 +81,8 @@ public class DataServlet extends HttpServlet {
     String name = request.getParameter("name-input");
     String mood = request.getParameter("mood");
     String email = userService.getCurrentUser().getEmail();
-    String imageURL = "";
-    if (getUploadedFileUrl(request, "image") != null){
-      imageURL = getUploadedFileUrl(request, "image");
-    }
+    String imageURL = getUploadedFileUrl(request, "image");
+    
     long timestamp = System.currentTimeMillis();
 
     // Creates entity with submitted data

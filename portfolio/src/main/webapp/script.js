@@ -23,26 +23,39 @@ function sayHello() {
   });
 }
 
-window.onload = authentication();
+window.onload = init();
 
 function init() {
   authentication();
   fetchBlobstoreUrlAndShowForm();
 }
 
+let commentsLimit = 5;
+
 // Retrieves json comments from server 
 function loadComments() {
-    
-  const commentsLimit = commentAmount();
+
   const order = document.getElementById("order").value;
 
   fetch('/data?number=' + commentsLimit + '&order=' + order).then(response => response.json()).then((comments) => {
     const allCommentsList = document.getElementById('comments-container');
     allCommentsList.innerHTML = '';
-      
-    for (var i = 0; i < commentsLimit; i++) {
-      allCommentsList.appendChild(createSingleComment(comments[i]));
+
+    if (commentsLimit === Number.MAX_VALUE) {
+      numberOfPages = 1;
+      for (var i = 0; i < commentsLimit; i++) {
+        allCommentsList.appendChild(createSingleComment(comments[i]));
+      }
+    } else {
+      console.log("comments length" + comments.length);
+      numberOfPages = Math.ceil(comments.length / commentsLimit);
+      console.log("number of pages" + numberOfPages);
+      for (var i = currentPage * commentsLimit; i < currentPage * commentsLimit + commentsLimit; i++) {
+        allCommentsList.appendChild(createSingleComment(comments[i]));
+        console.log("index" + i);
+      }
     }
+    
   });
 }
 
@@ -63,18 +76,26 @@ function createSingleComment(comment) {
   commentContent.className = "comments-text"
   const moodReceived = comment.mood;
   if (moodReceived === "happy") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😊 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment + "  😊 ");
   } else if (moodReceived === "heart") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😍 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment + "  😍 ");
   } else if (moodReceived === "surprised") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😯 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment + "  😯 ");
   } else if (moodReceived === "sad") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😥 ";
+    commentContent.innerHTML = sanitizeHTML(comment.comment + "  😥 ");
   } else {
     commentContent.innerHTML = sanitizeHTML(comment.comment);
   }
   commentDiv.appendChild(commentContent);
 
+  //commentDiv.appendChild('<img src="' + comment.imageURL + '"/>');
+
+  if (comment.imageURL != null) {
+    let imageContent = document.createElement('img');
+    imageContent.src = '"' + comment.imageUrl + '"';
+    commentDiv.appendChild(imageContent);
+  }
+ 
   const deleteCommentBtn = document.createElement("button");
   deleteCommentBtn.className = "single-delete-btn"
   deleteCommentBtn.innerText = "delete";
@@ -123,8 +144,20 @@ function deleteSingleComment(comment) {
 // Returns choosen value of comments
 function commentAmount() {
   const amount = document.getElementById("number");
-  const value = amount.value
-  return value
+  currentPage = 0;
+  const value = amount.value;
+  if (value === "5") {
+      commentsLimit = 5;
+    } else if (value === "10") {
+      commentsLimit = 10;
+    } else if (value === "15") {
+        commentsLimit = 15;
+    } else if(value === "20") {
+        commentsLimit = 20;
+    } else {
+        commentsLimit = Number.MAX_VALUE;
+    }
+    loadComments();
 }
 
 let userLoggedIn = false;
@@ -158,8 +191,7 @@ function hideOrShowCommentsSection() {
 }
 
 let currentPage = 0;
-const pages = 5;
-const numberOfPages = 5;
+let numberOfPages;
 
 // Disables button based on current page 
 function disableButton() {
@@ -178,19 +210,23 @@ function disableButton() {
 
 // Moves to next page if available
 function nextPage() {
+  console.log("next button pressed");
   if (currentPage < numberOfPages - 1) {
+    console.log("in next button");
     currentPage += 1;
-    buttonDisabler();
-    generatePage(currentPage);
+    disableButton();
+    loadComments();
   }
 }
 
 // Moves to previous page if available
 function previousPage() {
+  console.log("previous button pressed");
   if (currentPage > 0) {
+    console.log("in previous button");
     currentPage -= 1;
-    buttonDisabler();
-    generatePage(currentPage);
+    disableButton();
+    loadComments();
   }
 }
 
