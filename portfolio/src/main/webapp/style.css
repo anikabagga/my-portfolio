@@ -822,3 +822,50 @@ textarea {
   background-color: #4A99A7;
   color: white;
 }
+select {
+  display: inline;  
+  border: 0;
+  margin-left: 10px;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-bottom: 2px solid #555;
+  color: #4A99A7;
+  transition: all .4s ease-in-out;
+  background-color: #fff;
+  font-family: 'Noto Sans';
+  font-weight: 200;
+  font-size: 18px;
+  
+}
+
+select:hover {
+    cursor: pointer;    
+}
+
+select option {
+     border: 0;
+    border-bottom: 1px solid #555;
+    padding: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select::placeholder {
+  border-bottom: 4px solid;
+  cursor: pointer;
+}
+
+select::placeholder:hover {
+    color: lighten(#555, 20%);
+}
+
+.option {
+  display: inline-block;
+  position: relative;
+  margin-left: 6px;
+  background-color: #fff;
+  border: 0;
+  border-bottom: 1px solid #555;
+}
+ 

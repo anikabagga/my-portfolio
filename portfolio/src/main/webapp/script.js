@@ -67,7 +67,7 @@ function createSingleComment(comment) {
   if (comment.imageURL != null) {
     let imageContent = document.createElement('img');
     imageContent.className = "uploadedImage";
-    imageContent.src = comment.imageURL;
+    imageContent.src = "serve?blob-key=" + comment.imageURL;;
     imageDiv.appendChild(imageContent);
     commentDiv.appendChild(imageDiv);
     contentDiv.className = "col-md-9";
