@@ -47,14 +47,13 @@ function loadComments() {
         allCommentsList.appendChild(createSingleComment(comments[i]));
       }
     } else {
-      console.log("comments length" + comments.length);
       numberOfPages = Math.ceil(comments.length / commentsLimit);
-      console.log("number of pages" + numberOfPages);
       for (var i = currentPage * commentsLimit; i < currentPage * commentsLimit + commentsLimit; i++) {
         allCommentsList.appendChild(createSingleComment(comments[i]));
       }
     }
   });
+  disableButton();
 }
 
 function createSingleComment(comment) {
@@ -203,19 +202,15 @@ function disableButton() {
   const prevButton = document.getElementById('btnPrev');
   nextButton.disabled = false;
   prevButton.disabled = false;
-  console.log("in wrong disable");
   if (currentPage === 0) {
-    console.log("in wrong1 disable");
-    btnNext.disabled = false;
-    btnPrev.disabled = true;
+    nextButton.disabled = false;
+    prevButton.disabled = true;
   } else if (currentPage === numberOfPages - 1 && currentPage != 0) {
-    console.log("in wrong2 disable");
-    btnNext.disabled = true;
-    btnPrev.disabled = false;
+    nextButton.disabled = true;
+    prevButton.disabled = false;
   } else if (currentPage === numberOfPages - 1  && currentPage === 0) {
-    console.log("in right disable");
-    btnNext.disabled = true;
-    btnPrev.disabled = true;
+    nextButton.disabled = true;
+    prevButton.disabled = true;
   }
 }
 

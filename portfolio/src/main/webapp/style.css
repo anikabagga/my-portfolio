@@ -798,7 +798,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-.btnPrev:disabled, .btnNext:disabled {
+#btnPrev:disabled, #btnNext:disabled {
     background-color:  #999999;;
     color: #ffffff;
 }
