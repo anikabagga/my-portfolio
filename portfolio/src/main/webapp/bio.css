@@ -1,0 +1,237 @@
+*{
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+#content {
+  margin: 0 auto;
+}
+
+#hello-container {
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.helper-text {
+  font-style: italic; 
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Noto Sans';
+  font-weight: 300;
+  font-size:  80px;
+  font-style: bold;
+  margin-bottom: 40px;
+  margin-top: 35px;
+}
+
+p {
+  font-family: 'Open Sans';
+  font-weight: 200;
+  font-size: 20px;
+}
+
+/* nav bar styling */
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 50px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a
+{
+  text-decoration: none;
+  color: #232323;
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+  color: #3C6F7F
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  -webkit-touch-callout: none;
+}
+
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background:  rgb(0, 0, 0);
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  background: #fff;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+  font-family: 'Noto Sans';
+}
+
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+
+/* bio styling */
+.bio-text{
+  margin-left: 20px;
+}
+ 
+.social-icons-ul {
+  display: flex;
+  flex-direction: row;
+  z-index: 2;
+  list-style-type: none;
+  margin-top: 20px;
+  padding: 0px;
+} 
+
+.profile-img {
+  margin-top: 10px;
+}
+
+.social-icons {
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  margin: 25px 9px;
+  padding: 15px;
+  border-radius: 50%;
+  background: #3e4040;
+  color: #fff;
+}
+ 
+.social-icons:hover {
+  background: #fff;
+  color: #3e4040;
+  border: 2px solid #3e4040;
+}
+
+#greeting-container {
+  margin-top: 20px;
+}
+
+.profile-img img {
+  vertical-align: middle;
+  width: auto;
+  max-height: 100%;
+  border-radius: 50% ;
+}
+
+/* activities section styling */
+h2{
+  font-family: 'Noto Sans';
+  font-weight: 300;
+  font-size:  40px;
+  font-style: bold;
+  margin-top: 50px;
+}
+
+.underline-magical {
+  background-image: linear-gradient(to right, rgb(250, 112, 154) 0%, rgb(254, 225, 64) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 88%;
+  transition: background-size 0.25s ease-in;
+}
+
+.underline-magical:hover{
+  background-size: 100% 88%;
+}
+
+/* footer */
+.footer {
+  margin-top: 30px;
+}
+
+.fa-heart {
+  color: red;
+  margin-left: 5px;
+  margin-right: 5px;
+  animation-name: pulse;
+  animation-duration: .50s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  100% {transform: scale(1.3);}
+}
+

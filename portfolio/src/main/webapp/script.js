@@ -16,68 +16,14 @@
  * Adds a random greeting to the page.
  */
 
-// Prints Hello Anika on button click 
-function sayHello() {
-  fetch('/data').then(response => response.text()).then((greeting) => {
-    document.getElementById('hello-container').innerText = greeting;
-  });
-}
 
-window.onload = authentication();
+window.onload = init();
 
-// Retrieves json comments from server 
-function loadComments() {
-    
-  const commentsLimit = commentAmount();
-  const order = document.getElementById("order").value;
+let userLoggedIn = false;
 
-  fetch('/data?number=' + commentsLimit + '&order=' + order).then(response => response.json()).then((comments) => {
-    const allCommentsList = document.getElementById('comments-container');
-    allCommentsList.innerHTML = '';
-      
-    for (var i = 0; i < commentsLimit; i++) {
-      allCommentsList.appendChild(createSingleComment(comments[i]));
-    }
-  });
-}
-
-function createSingleComment(comment) {
-  const commentDiv = document.createElement('div');
-
-  const nameTitle = document.createElement('h3');
-  nameTitle.className = "comments-name"
-  nameTitle.innerText = sanitizeHTML(comment.name);
-  commentDiv.appendChild(nameTitle);
-
-  const emailContent = document.createElement('p');
-  emailContent.className = "comments-text"
-  emailContent.innerText = comment.email;
-  commentDiv.appendChild(emailContent);
-
-  const commentContent = document.createElement('p');
-  commentContent.className = "comments-text"
-  const moodReceived = comment.mood;
-  if (moodReceived === "happy") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😊 ";
-  } else if (moodReceived === "heart") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😍 ";
-  } else if (moodReceived === "surprised") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😯 ";
-  } else if (moodReceived === "sad") {
-    commentContent.innerHTML = sanitizeHTML(comment.comment) + "  😥 ";
-  } else {
-    commentContent.innerHTML = sanitizeHTML(comment.comment);
-  }
-  commentDiv.appendChild(commentContent);
-
-  const deleteCommentBtn = document.createElement("button");
-  deleteCommentBtn.className = "single-delete-btn"
-  deleteCommentBtn.innerText = "delete";
-  deleteCommentBtn.addEventListener('click', () => {
-    deleteSingleComment(comment);
-  });
-  commentDiv.appendChild(deleteCommentBtn);
-  return commentDiv;
+function init() {
+  authentication();
+  fetchBlobstoreUrlAndShowForm();
 }
 
 // Prevents HTML injection by removing markup from code
@@ -87,42 +33,18 @@ function sanitizeHTML(str) {
   return temp.innerHTML;
 }
 
-// 
+// Gets URL for uploaded image
 function fetchBlobstoreUrlAndShowForm() {
   fetch('/blobstore-handler')
-      .then((response) => {
-        return response.text();
-      })
-      .then((imageUploadUrl) => {
-        const messageForm = document.getElementById('comments-form');
-        //messageForm.action = imageUploadUrl;
-        //messageForm.classList.remove('hidden');
-      });
+    .then((response) => {
+    return response.text();
+    })
+    .then((imageUploadUrl) => {
+    const messageForm = document.getElementById('comments-form');
+    messageForm.action = imageUploadUrl;
+    //messageForm.classList.remove('hidden');
+  });
 }
-
-// Performs POST request to /delete-data and fetches data again so comments are deleted
-function deleteComments() {
-  fetch("/delete-data", {method: 'POST'})
-        .then(loadComments());
-}
-
-// Performs POST request to /delete-single-comment and fetches remaining comments 
-function deleteSingleComment(comment) {
-  const id = comment.id;
-  const email = comment.email;
-  console.log(email);
-  fetch('/delete-single-comment?id=' + id + '&email=' + email, {method: 'POST'})
-        .then(loadComments());
-}
-
-// Returns choosen value of comments
-function commentAmount() {
-  const amount = document.getElementById("number");
-  const value = amount.value
-  return value
-}
-
-let userLoggedIn = false;
 
 // Displays whether user is logged in based on servlet response
 function authentication() {
@@ -133,7 +55,6 @@ function authentication() {
       loginContainer.innerHTML = "<p>please login to view comments. login <a href=\"" + loginData.url + "\">here</a>.</p>";
       userLoggedIn = false;
     } else {
-      console.log(loginData.email);
       loginContainer.innerHTML = "<p>you are logged in as " + loginData.email + "!\nlogout <a href=\""
         + loginData.url + "\">here</a>.</p>";
       userLoggedIn = true;
@@ -153,8 +74,7 @@ function hideOrShowCommentsSection() {
 }
 
 let currentPage = 0;
-const pages = 5;
-const numberOfPages = 5;
+let numberOfPages;
 
 // Disables button based on current page 
 function disableButton() {
@@ -163,20 +83,23 @@ function disableButton() {
   nextButton.disabled = false;
   prevButton.disabled = false;
   if (currentPage === 0) {
-    btnNext.disabled = false;
-    btnPrev.disabled = true;
-  } else if (currentPage === numberOfPages - 1) {
-    btnNext.disabled = true;
-    btnPrev.disabled = false;
-  } 
+    nextButton.disabled = false;
+    prevButton.disabled = true;
+  } else if (currentPage === numberOfPages - 1 && currentPage != 0) {
+    nextButton.disabled = true;
+    prevButton.disabled = false;
+  } else if (currentPage === numberOfPages - 1  && currentPage === 0) {
+    nextButton.disabled = true;
+    prevButton.disabled = true;
+  }
 }
 
 // Moves to next page if available
 function nextPage() {
   if (currentPage < numberOfPages - 1) {
     currentPage += 1;
-    buttonDisabler();
-    generatePage(currentPage);
+    disableButton();
+    loadComments();
   }
 }
 
@@ -184,11 +107,7 @@ function nextPage() {
 function previousPage() {
   if (currentPage > 0) {
     currentPage -= 1;
-    buttonDisabler();
-    generatePage(currentPage);
+    disableButton();
+    loadComments();
   }
 }
-
-
-
-

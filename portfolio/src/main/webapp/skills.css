@@ -1,0 +1,45 @@
+/* skills section */
+.tag {
+  color: white;
+  display: inline-block;
+  padding: 10px 18px 10px 29px;
+  border-radius: 90px 30px 30px 90px;
+  position: relative;
+  margin: 0 25px 25px 0;
+  font-family: 'Noto Sans';
+  font-weight: 200px;
+  font-size: 15px;
+}
+
+.tag:hover {
+  color: #2E4455;
+  background: white;
+  border-color:  #2E4455;
+  border-style: solid;
+}
+
+.tag1 {
+  background: #2E4455;
+  opacity: 1;
+}
+
+.tag2{
+  background: #3C6F7F;
+  opacity: 1;
+}
+
+.tag3 {
+  background: #4A99A7;
+  opacity: 1;
+}
+
+.tag:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  top: 14px;
+  left: 10px;
+  border-radius: 90px;
+}
