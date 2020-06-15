@@ -23,8 +23,8 @@ import java.util.Collection;
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     //throw new UnsupportedOperationException("TODO: Implement this method.");
-    Collection<TimeRange> mandatory_attendees = new ArrayList<>();
-    Collection<TimeRange> optional_attendees = new ArrayList<>();
+    //Collection<TimeRange> mandatory_attendees = request.getAttendees();
+    //Collection<TimeRange> optional_attendees = request.getOptionalAttendees();
 
     return findTime(events, request);
   }
@@ -57,6 +57,8 @@ public final class FindMeetingQuery {
       counter++;
       skip = true;
       eventAttendees = e.getAttendees();
+
+      // Ignore event if no overlapping attendees in event and requested meeting
       for (String attendee: eventAttendees) {
         if (requestAttendees.contains(attendee)) {
           skip = false;
@@ -66,6 +68,7 @@ public final class FindMeetingQuery {
         }
       }
 
+      // Adjust available meeting times based on event start/end 
       if (!skip) {
         event_start = e.getWhen().start();
         event_end = e.getWhen().end();
@@ -74,11 +77,11 @@ public final class FindMeetingQuery {
           availableStart = event_end;
         }
 
+        // Check overlapping events 
         if (event_start < availableStart) {
           if (event_end > availableStart) {
             availableStart = event_end;
           }
-
         }
 
         if (availableStart <= event_start) {
@@ -88,6 +91,7 @@ public final class FindMeetingQuery {
           availableStart = event_end;
         }
 
+        // If last event, add remaining time available in day 
         if (counter == numEvents) {
           if (availableStart + requestDuration <= TimeRange.END_OF_DAY) {
             possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, TimeRange.END_OF_DAY, true));
@@ -95,7 +99,6 @@ public final class FindMeetingQuery {
         }
       }
     }
-
     return possibleMeetingTimes;
   }
 }
