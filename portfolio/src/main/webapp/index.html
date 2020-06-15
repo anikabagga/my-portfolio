@@ -9,8 +9,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bio.css">
+    <link rel="stylesheet" href="comments.css">
+    <link rel="stylesheet" href="food.css">
+    <link rel="stylesheet" href="project-timeline.css">
+    <link rel="stylesheet" href="skills.css">
     <script src="script.js"></script>
+    <script src="comments.js"></script>
+
     <div class="head_title">
       <title>Anika Bagga</title>
     </div>
@@ -361,32 +367,32 @@
                   </select>
                 </div>
                 <div class="row">
-                  <p class= "drop-menu">Upload an image:</p>
-                  <input class= "drop-menu" type="file" name="image" onchange="fetchBlobstoreUrlAndShowForm()">
+                  <input class= "drop-menu" type="file" name="image" id="file">
                 </div>
                 <div class="row">
-                  <input class="btn" type="submit" onclick="fetchBlobstoreUrlAndShowForm()"/>
-                </div>
-
-                <!-- Selector menu for how many comments to display -->
-                <div class="row">
-                  <label class="drop-menu" for="number">Items:</label>
-                 <select name="number" id="number" onchange="commentAmount()">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="All">All</option>
-                  </select>
-
-                  <!-- Selector menu for order of comments -->
-                  <label class="drop-menu" for="order">Order:</label>
-                  <select name="order" id="order" onchange="loadComments()">
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                  </select>
+                  <input class="btn" type="submit"/>
                 </div>
               </form>
+              <div id="alert-area" class="alert-area"></div>
+
+              <!-- Selector menu for how many comments to display -->
+              <div class="row">
+                <label class="drop-menu" for="number">Items:</label>
+                <select name="number" id="number" onchange="commentAmount()">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="All">All</option>
+                </select>
+
+                <!-- Selector menu for order of comments -->
+                <label class="drop-menu" for="order">Order:</label>
+                <select name="order" id="order" onchange="loadComments()">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                </select>
+              </div>
 
               <div class="row">
                 <ul id="comments-container"></ul>
@@ -399,7 +405,7 @@
 
               <!-- Delete all comments button -->
               <div class="row">
-                <button class="btn" onclick="deleteComments()">delete all</button> 
+                <button  id="alertShowMessage" class="btn" onclick="deleteComments()">delete all</button> 
               </div>
             </div>
 

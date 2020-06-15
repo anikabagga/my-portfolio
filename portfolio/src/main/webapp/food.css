@@ -1,0 +1,48 @@
+/* styling food diary section */
+.food-dairy {
+  margin-top: 40px;
+  margin-left: 0px;
+}
+
+.food-img img {
+  margin-top: 20px;
+  vertical-align: left;
+  padding-left: 0px;
+  margin-left: 0px;
+  width: 90%; 
+  height: 25%;
+}
+
+.food-second {
+  margin-top: 30px;
+}
+
+/* food pictures caption styling */
+.caption-style-1 .caption{
+  position: relative;
+  width: 90%; 
+  height: 25%;
+  -webkit-transition:all 0.15s ease-in-out;
+  -moz-transition:all 0.15s ease-in-out;
+  -o-transition:all 0.15s ease-in-out;
+  -ms-transition:all 0.15s ease-in-out;
+  transition:all 0.15s ease-in-out;
+}
+
+.caption-style-1 .caption-text{
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.food-img:hover .caption-text{
+  opacity: 1;
+}

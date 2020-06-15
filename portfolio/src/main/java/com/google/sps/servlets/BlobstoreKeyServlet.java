@@ -11,7 +11,7 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import javax.servlet.annotation.WebServlet;
 
 @WebServlet("serve")
-public class Serve extends HttpServlet {
+public class BlobstoreKeyServlet extends HttpServlet {
     private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
     @Override

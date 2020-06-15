@@ -33,7 +33,7 @@ import java.util.Map;
 
 /** Servlet that returns comment data */
 @WebServlet("/data")
-public class DataServlet extends HttpServlet {
+public class CommentDataServlet extends HttpServlet {
 
   private UserService userService = UserServiceFactory.getUserService();
   @Override
@@ -42,11 +42,8 @@ public class DataServlet extends HttpServlet {
     String commentOrder = request.getParameter("order");
     
     Query query;
-    if (commentOrder != null && commentOrder.equals("newest")) {
-      query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-    } else {
-      query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
-    }
+    boolean isDescending = commentOrder != null && commentOrder.equals("newest");
+    query = new Query("Comment").addSort("timestamp", isDescending ? SortDirection.DESCENDING : SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
