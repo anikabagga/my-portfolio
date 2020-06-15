@@ -23,10 +23,23 @@ import java.util.Collection;
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     //throw new UnsupportedOperationException("TODO: Implement this method.");
-    //Collection<TimeRange> mandatory_attendees = request.getAttendees();
-    //Collection<TimeRange> optional_attendees = request.getOptionalAttendees();
+    Collection<String> mandatory_attendees = request.getAttendees();
+    Collection<String> optional_attendees = request.getOptionalAttendees();
+    Collection<String> allAttendees = new ArrayList<>();
+    allAttendees.addAll(mandatory_attendees);
+    allAttendees.addAll(optional_attendees);
+    MeetingRequest meeting_with_all_attendees = new MeetingRequest(allAttendees, request.getDuration());
 
-    return findTime(events, request);
+    Collection<TimeRange> meeting_with_mandatory = findTime(events, request);
+    System.out.println("Mandatory: " + meeting_with_mandatory);
+    Collection<TimeRange> meeting_with_all = findTime(events, meeting_with_all_attendees);
+    System.out.println("Optional: " + meeting_with_all);
+
+    if (meeting_with_all.size() > 0 || mandatory_attendees.isEmpty()) {
+      return meeting_with_all;
+    } else {
+      return meeting_with_mandatory;
+    }
   }
 
   public Collection<TimeRange> findTime(Collection<Event> events, MeetingRequest request) {
@@ -52,14 +65,14 @@ public final class FindMeetingQuery {
         possibleMeetingTimes.add(TimeRange.WHOLE_DAY);
         return possibleMeetingTimes;
     }
-    
+
     for (Event e : events) {
       counter++;
       skip = true;
       eventAttendees = e.getAttendees();
 
       // Ignore event if no overlapping attendees in event and requested meeting
-      for (String attendee: eventAttendees) {
+      for (String attendee : eventAttendees) {
         if (requestAttendees.contains(attendee)) {
           skip = false;
           break;
@@ -93,7 +106,7 @@ public final class FindMeetingQuery {
 
         // If last event, add remaining time available in day 
         if (counter == numEvents) {
-          if (availableStart + requestDuration <= TimeRange.END_OF_DAY) {
+         if (availableStart + requestDuration <= TimeRange.END_OF_DAY) {
             possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, TimeRange.END_OF_DAY, true));
           }
         }
