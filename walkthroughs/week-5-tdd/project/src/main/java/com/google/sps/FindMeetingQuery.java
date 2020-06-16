@@ -22,19 +22,21 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public final class FindMeetingQuery {
-  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> mandatory_attendees = request.getAttendees();
-    Collection<String> optional_attendees = request.getOptionalAttendees();
-    Collection<String> allAttendees = new ArrayList<>();
-    allAttendees.addAll(mandatory_attendees);
-    allAttendees.addAll(optional_attendees);
-    MeetingRequest meeting_with_all_attendees = new MeetingRequest(allAttendees, request.getDuration());
 
-    Collection<TimeRange> meeting_with_all = findTime(events, meeting_with_all_attendees);
+  static final int startOfDay = TimeRange.START_OF_DAY;
+  static final int endOfDay = TimeRange.END_OF_DAY;
+
+  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+    Collection<String> allAttendees = new ArrayList<>();
+    allAttendees.addAll(request.getAttendees());
+    allAttendees.addAll(request.getOptionalAttendees());
+    MeetingRequest meetingWithEveryone = new MeetingRequest(allAttendees, request.getDuration());
+
+    Collection<TimeRange> meetingTimesWithAll = findTime(events, meetingWithEveryone);
 
     // Returns meeting times based on if there are available times with optional attendees 
-    if (meeting_with_all.size() > 0 || mandatory_attendees.isEmpty()) {
-      return meeting_with_all;
+    if (meetingTimesWithAll.size() > 0 || request.getAttendees().isEmpty()) {
+      return meetingTimesWithAll;
     } else {
       return findTime(events, request);
     }
@@ -47,11 +49,8 @@ public final class FindMeetingQuery {
     int requestDuration = (int)request.getDuration();
     Collection<String> requestAttendees = request.getAttendees();
     int numEvents = events.size();
-    int availableStart = TimeRange.START_OF_DAY;
-    int event_start;
-    int event_end;
+    int availableStart = startOfDay;
     int counter = 0;
-    Set<String> eventAttendees;
 
     // No meeting times if duration is greater than whole day 
     if (requestDuration > TimeRange.WHOLE_DAY.duration()) {
@@ -76,39 +75,25 @@ public final class FindMeetingQuery {
 
     for (TimeRange e : blockedTimes) {
       counter++;
-      event_start = e.start();
-      event_end = e.end();
+      int eventStart = e.start();
+      int eventEnd = e.end();
 
-      if (event_start == TimeRange.START_OF_DAY) {
-        availableStart = event_end;
+      // Check for first event and overlapping events 
+      if (eventStart == startOfDay || eventStart < availableStart && eventEnd > availableStart) {
+        availableStart = eventEnd;
       }
-
-      // Check for overlapping events
-      if (event_start < availableStart) {
-        if (event_end > availableStart) {
-        availableStart = event_end;
+      
+      if (availableStart <= eventStart) {
+        if (hasEnoughMeetingTime(eventStart, availableStart, requestDuration)) {
+          possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, eventStart, false));
         }
-      }
-
-      if (availableStart <= event_start) {
-        if (event_start - availableStart >= requestDuration) {
-        possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, event_start, false));
-        }
-        availableStart = event_end;
-      }
-
-      // If last event, add remaining time available in day 
-      if (counter == numEvents) {
-        if (availableStart + requestDuration <= TimeRange.END_OF_DAY) {
-        possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, TimeRange.END_OF_DAY, true));
-        availableStart = TimeRange.END_OF_DAY + 1;
-        }
+        availableStart = eventEnd;
       }
     }
 
     // Add remaining time available after all events checked 
-    if (availableStart + requestDuration <= TimeRange.END_OF_DAY) {
-      possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, TimeRange.END_OF_DAY, true));
+    if (hasEnoughTimeInDay(availableStart, requestDuration)) {
+      possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, endOfDay, true));
     }
     return possibleMeetingTimes;
   }
@@ -116,5 +101,13 @@ public final class FindMeetingQuery {
   // Checks if any people in meeting request are in the event 
   public boolean checkOverlap(Collection<String> requestedAttendees, Collection<String> eventAttendees) {
     return !Collections.disjoint(requestedAttendees, eventAttendees);
+  }
+
+  public boolean hasEnoughMeetingTime(int eventStart, int availableStart, int requestDuration) {
+    return eventStart - availableStart >= requestDuration;
+  }
+
+  public boolean hasEnoughTimeInDay(int availableStart, int requestDuration) {
+    return availableStart + requestDuration <= endOfDay;
   }
 }
