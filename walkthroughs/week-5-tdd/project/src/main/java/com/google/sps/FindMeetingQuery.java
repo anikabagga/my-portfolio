@@ -23,8 +23,8 @@ import java.util.Comparator;
 
 public final class FindMeetingQuery {
 
-  static final int startOfDay = TimeRange.START_OF_DAY;
-  static final int endOfDay = TimeRange.END_OF_DAY;
+  static final int START_OF_DAY = TimeRange.START_OF_DAY;
+  static final int END_OF_DAY = TimeRange.END_OF_DAY;
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> allAttendees = new ArrayList<>();
@@ -49,8 +49,7 @@ public final class FindMeetingQuery {
     int requestDuration = (int)request.getDuration();
     Collection<String> requestAttendees = request.getAttendees();
     int numEvents = events.size();
-    int availableStart = startOfDay;
-    int counter = 0;
+    int availableStart = START_OF_DAY;
 
     // No meeting times if duration is greater than whole day 
     if (requestDuration > TimeRange.WHOLE_DAY.duration()) {
@@ -74,12 +73,11 @@ public final class FindMeetingQuery {
     Collections.sort((List)blockedTimes, TimeRange.ORDER_BY_START);
 
     for (TimeRange e : blockedTimes) {
-      counter++;
       int eventStart = e.start();
       int eventEnd = e.end();
 
       // Check for first event and overlapping events 
-      if (eventStart == startOfDay || eventStart < availableStart && eventEnd > availableStart) {
+      if (eventStart == START_OF_DAY || eventStart < availableStart && eventEnd > availableStart) {
         availableStart = eventEnd;
       }
       
@@ -93,7 +91,7 @@ public final class FindMeetingQuery {
 
     // Add remaining time available after all events checked 
     if (hasEnoughTimeInDay(availableStart, requestDuration)) {
-      possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, endOfDay, true));
+      possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, END_OF_DAY, true));
     }
     return possibleMeetingTimes;
   }
@@ -108,6 +106,6 @@ public final class FindMeetingQuery {
   }
 
   public boolean hasEnoughTimeInDay(int availableStart, int requestDuration) {
-    return availableStart + requestDuration <= endOfDay;
+    return availableStart + requestDuration <= END_OF_DAY;
   }
 }
