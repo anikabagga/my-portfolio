@@ -63,11 +63,7 @@ public final class FindMeetingQuery {
     }
 
     // Find events in which people in meeting request are in the event 
-    for (Event event : events) {
-      if (checkOverlap(event.getAttendees(), requestAttendees)) {
-        blockedTimes.add(event.getWhen());
-      }
-    }
+    blockedTimes = eventsWithAttendeeOverlap(events, requestAttendees);
 
     // Order blocked meetings times based on start time 
     Collections.sort((List)blockedTimes, TimeRange.ORDER_BY_START);
@@ -83,7 +79,7 @@ public final class FindMeetingQuery {
       
       if (availableStart <= eventStart) {
         if (hasEnoughMeetingTime(eventStart, availableStart, requestDuration)) {
-          possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, eventStart, false));
+          possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, eventStart, /* inclusive= */ false));
         }
         availableStart = eventEnd;
       }
@@ -91,14 +87,20 @@ public final class FindMeetingQuery {
 
     // Add remaining time available after all events checked 
     if (hasEnoughTimeInDay(availableStart, requestDuration)) {
-      possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, END_OF_DAY, true));
+      possibleMeetingTimes.add(TimeRange.fromStartEnd(availableStart, END_OF_DAY, /* inclusive= */ true));
     }
     return possibleMeetingTimes;
   }
 
-  // Checks if any people in meeting request are in the event 
-  public boolean checkOverlap(Collection<String> requestedAttendees, Collection<String> eventAttendees) {
-    return !Collections.disjoint(requestedAttendees, eventAttendees);
+  // Returns list of events with attendees in meeting request 
+  public List<TimeRange> eventsWithAttendeeOverlap(Collection<Event> events, Collection<String> requestedAttendees) {
+    List<TimeRange> meetingsToCheck = new ArrayList<>();
+    for (Event event : events) {
+      if (!Collections.disjoint(requestedAttendees, event.getAttendees())) {
+        meetingsToCheck.add(event.getWhen());
+      }
+    }
+    return meetingsToCheck;
   }
 
   public boolean hasEnoughMeetingTime(int eventStart, int availableStart, int requestDuration) {
